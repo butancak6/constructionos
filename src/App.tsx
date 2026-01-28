@@ -5,7 +5,6 @@ import { useWavRecorder } from "./hooks/useWavRecorder.ts";
 import { generateInvoicePDF } from "./pdfGenerator";
 import { dataService } from "./services/dataService";
 import { supabase } from "./lib/supabase"; // Direct import for robust logic
-import Settings from "./components/Settings";
 import {
   LayoutDashboard,
   Users,
@@ -14,17 +13,16 @@ import {
   Mic,
   ChevronLeft,
   ChevronRight,
-  MoreVertical,
-  Menu,
   Phone,
-  MapPin,
-  Camera,
   X,
-  Plus,
   Calendar,
   List,
   Brain,
-  Loader2
+  Loader2,
+  Trash2,
+  CheckCircle2,
+  AlertCircle,
+  UserPlus
 } from "lucide-react";
 
 // --- TYPES ---
@@ -269,7 +267,7 @@ export default function App() {
     try {
       await invoke("open_system_link", { url });
     } catch (e) {
-      alert("Link Error: " + e);
+      showToast("Link Error: " + e, "error");
     }
   }
 
@@ -278,7 +276,7 @@ export default function App() {
     try {
       await invoke("open_invoice_pdf", { id });
     } catch (e) {
-      alert("PDF Error: " + e);
+      showToast("PDF Error: " + e, "error");
     }
   }
 
@@ -300,7 +298,7 @@ export default function App() {
       setStatus("RECORDING");
     } catch (err: any) {
       addDebug("❌ Mic Error: " + err.message);
-      alert("Mic Error: " + err);
+      showToast("Mic Error: " + err, "error");
     }
   }
 
@@ -345,7 +343,7 @@ export default function App() {
 
       if (!text || text.trim().length < 5) {
         addDebug("⚠️ No voice detected or too short.");
-        alert("⚠️ No voice detected. Please speak closer.");
+        showToast("No voice detected. Please speak closer.", "error");
         setIsProcessing(false);
         return;
       }
@@ -356,7 +354,7 @@ export default function App() {
 
     } catch (error: any) {
       addDebug("❌ Process Failed: " + error.message);
-      alert(`AI Error: ${error.message}`);
+      showToast(`AI Error: ${error.message}`, "error");
     } finally {
       setIsProcessing(false);
     }
@@ -498,7 +496,7 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
 
       default:
         addDebug("⚠️ Unknown Intent: " + result.intent);
-        alert("Could not understand command.");
+        showToast("Could not understand command.", "error");
     }
   }
 
@@ -517,7 +515,7 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           try {
             const result = await invoke("analyze_image", { imageData: base64 }) as any;
             setDraft(result);
-          } catch (err: any) { alert("Image AI Error: " + err); }
+          } catch (err: any) { showToast("Image AI Error: " + err, "error"); }
           finally {
             setStatus("IDLE");
             if (fileInputRef.current) fileInputRef.current.value = "";
@@ -543,12 +541,11 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
   async function handleApproveInvoice() {
     if (!draft) return;
     setIsSaving(true);
-    alert("🚀 Starting Process...");
+    showToast("🚀 Starting Process...", "success");
 
     // 0. Validate Data
-    console.log("Saving Invoice Data:", draft);
     if (!draft.amount || !draft.client) {
-      alert("Error: Missing Invoice Data (Amount or Client)");
+      showToast("Error: Missing Invoice Data (Amount or Client)", "error");
       setIsSaving(false);
       return;
     }
@@ -564,15 +561,14 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           // Using existing frontend generator that wraps the Rust backend
           const pdfPath = await generateInvoicePDF(invoiceData);
 
-          console.log("✅ PDF Generated at:", pdfPath);
-          alert(`PDF Saved to: ${pdfPath}`);
+          showToast(`PDF Saved to: ${pdfPath}`, "success");
           invoiceData.pdf_path = pdfPath;
 
         } catch (pdfErr) {
           console.error("⚠️ PDF GENERATION FAILED:", pdfErr);
           // We DO NOT throw the error here. We let the app continue to save to Supabase.
           // This prevents the "Freeze" if Rust fails.
-          alert("⚠️ PDF Failed to generate, but Invoice was saved to Cloud.");
+          showToast("⚠️ PDF Failed to generate, but Invoice was saved to Cloud.", "error");
           invoiceData.pdf_path = null;
         }
 
@@ -596,7 +592,7 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
 
         if (error) {
           console.error("Supabase Error:", error);
-          alert("Supabase Error: " + error.message);
+          showToast("Supabase Error: " + error.message, "error");
           throw error;
         }
 
@@ -636,12 +632,11 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
         // 2. Sync to Local SQLite (so it persists on reload)
         try {
           await invoke("confirm_invoice", { invoice: invoiceData });
-          console.log("✅ Saved to Local DB");
         } catch (localErr) {
           console.error("⚠️ Local DB Save Failed:", localErr);
         }
 
-        alert("✅ Data Saved to Cloud & Local!");
+        showToast("✅ Data Saved to Cloud & Local!", "success");
 
       } else if (draft.intent === "TASK") {
         await invoke("confirm_task", { task: draft });
@@ -664,14 +659,14 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
 
     } catch (e: any) {
       console.error("❌ Fn Failure:", e);
-      alert("Critical Failure: " + e.message);
+      showToast("Critical Failure: " + e.message, "error");
     } finally {
       setIsSaving(false);
     }
   }
 
   async function runDiagnostics() {
-    alert("1. Starting Diagnostic Test...");
+    showToast("1. Starting Diagnostic Test...", "success");
 
     try {
       // Test 1: Check Supabase Config
@@ -679,7 +674,6 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
       if (!supabase) throw new Error("Supabase Client is UNDEFINED");
 
       // Test 2: Write to Database
-      alert("2. Attempting Database Write...");
       // NOTE: Using 'client' instead of 'client_name' to match schema inferred from handleApproveInvoice
       const { data, error } = await supabase
         .from('invoices')
@@ -687,26 +681,25 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
         .select();
 
       if (error) throw error;
-      alert("✅ DATABASE SUCCESS! Row ID: " + data[0].id);
+      showToast("✅ DATABASE SUCCESS!", "success");
 
       // Test 3: Fire Webhook
       const url = localStorage.getItem("webhook_url");
       if (url) {
-        alert("3. Testing Webhook...");
         await fetch(url, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({ test: true })
         });
-        alert("✅ WEBHOOK SUCCESS!");
+        showToast("✅ WEBHOOK SUCCESS!", "success");
       } else {
-        alert("⚠️ No Webhook URL found in settings.");
+        showToast("⚠️ No Webhook URL found in settings.", "error");
       }
 
     } catch (err: any) {
       console.error(err);
-      alert("❌ FAILURE: " + (err.message || JSON.stringify(err)));
+      showToast("❌ FAILURE: " + (err.message || JSON.stringify(err)), "error");
     }
   }
 
@@ -1225,6 +1218,40 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           )}
 
           {currentTab === "CALENDAR" && <CalendarTab />}
+
+          {currentTab === "SETTINGS" && (
+            <div className="space-y-6 animate-in slide-in-from-right duration-300">
+                <h2 className="text-2xl font-black text-slate-900 mb-4">Settings</h2>
+
+                <div className="bg-white p-4 rounded-xl shadow-sm border border-stone-200">
+                    <h3 className="font-bold text-slate-900 mb-2">App Info</h3>
+                    <div className="flex justify-between py-2 border-b border-stone-100">
+                        <span className="text-slate-500">Version</span>
+                        <span className="font-medium">v0.2.0 (Alpha)</span>
+                    </div>
+                    <div className="flex justify-between py-2">
+                        <span className="text-slate-500">Build</span>
+                        <span className="font-medium">Production</span>
+                    </div>
+                </div>
+
+                <div className="bg-white p-4 rounded-xl shadow-sm border border-stone-200">
+                    <h3 className="font-bold text-slate-900 mb-2">Data Management</h3>
+                    <button
+                        onClick={() => {
+                            if(confirm("Clear all local data? This cannot be undone.")) {
+                                localStorage.clear();
+                                window.location.reload();
+                            }
+                        }}
+                        className="w-full py-3 text-red-600 font-bold bg-red-50 rounded-lg hover:bg-red-100 transition-colors flex items-center justify-center gap-2"
+                    >
+                        <Trash2 size={18} />
+                        Clear All Data
+                    </button>
+                </div>
+            </div>
+          )}
 
         </main>
 
