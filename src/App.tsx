@@ -22,7 +22,9 @@ import {
   X,
   Plus,
   Calendar,
-  List
+  List,
+  Brain,
+  Loader2
 } from "lucide-react";
 
 // --- TYPES ---
@@ -198,8 +200,17 @@ export default function App() {
       setTasks(tsk);
       const con = await invoke("get_contacts") as Contact[];
       setContacts(con);
+      // Map contacts to clients for UI display
+      setClients(con.map(c => ({
+        id: c.id,
+        name: c.name,
+        phone: c.phone,
+        company: c.company || undefined
+      })));
       const exp = await invoke("get_expenses") as Expense[];
       setExpenses(exp);
+      const evts = await invoke("get_calendar_events") as CalendarEvent[];
+      setCalendarEvents(evts);
       const stats = await invoke("get_financial_summary") as FinancialSummary;
       setFinancials(stats);
       const activity = await invoke("get_recent_activity") as ActivityItem[];
@@ -403,6 +414,7 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           duration_minutes: result.duration_minutes || 60
         };
         setCalendarEvents(prev => [newEvent, ...prev]);
+        invoke("confirm_calendar_event", { event: newEvent }).catch(e => console.error(e));
         setCurrentTab("CALENDAR"); // Auto-switch
         addDebug(`📅 Event Created: ${newEvent.title}`);
         break;
@@ -413,9 +425,10 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           description: result.description || "New Task",
           priority: (result.priority as any) || "Medium",
           done: false,
-
+          due_date: null
         };
         setTasks(prev => [newTask, ...prev]);
+        invoke("confirm_task", { task: newTask }).catch(e => console.error(e));
         setCurrentTab("TASKS"); // Auto-switch
         addDebug(`✅ Task Created: ${newTask.description}`);
         break;
@@ -428,6 +441,13 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           address: result.address
         };
         setClients(prev => [newClient, ...prev]);
+        invoke("confirm_contact", { contact: {
+          id: newClient.id,
+          name: newClient.name,
+          phone: newClient.phone || "",
+          company: newClient.company || null,
+          created_at: new Date().toISOString()
+        }}).catch(e => console.error(e));
         setCurrentTab("CONTACTS"); // Auto-switch
         addDebug(`👤 Client Saved: ${newClient.name}`);
         break;
@@ -723,6 +743,7 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
       </div>
 
       <NavItem tab="TASKS" label="Tasks" icon={List} />
+      <NavItem tab="CALENDAR" label="Calendar" icon={Calendar} />
       <NavItem tab="CONTACTS" label="Clients" icon={Users} />
     </nav>
   );
@@ -812,32 +833,38 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
             ))}
           </div>
           <div className="grid grid-cols-7 gap-1">
-            {blanks.map(x => <div key={`blank-${x}`} className="h-10"></div>)}
+            {blanks.map(x => <div key={`blank-${x}`} className="h-14"></div>)}
             {days.map(day => {
               const date = new Date(year, month, day);
               const isSelected = isSameDay(date, selectedDate);
               const isToday = isSameDay(date, new Date());
               const items = getDayItems(day);
               const hasItems = items.length > 0;
-              // Determine dot color based on priority: Event > Task > Invoice
-              let dotColor = "bg-slate-300";
-              if (items.some(i => (i as any).type === 'invoice')) dotColor = "bg-blue-500";
-              if (items.some(i => (i as any).type === 'task')) dotColor = "bg-green-500";
-              if (items.some(i => !(i as any).type)) dotColor = "bg-indigo-500"; // Event has no type prop added
 
               return (
                 <div
                   key={day}
                   onClick={() => setSelectedDate(date)}
-                  className={`h-10 rounded-full flex items-center justify-center text-sm font-medium cursor-pointer relative transition-all
-                    ${isSelected ? 'bg-primary text-white shadow-md scale-105' : 'hover:bg-slate-50 text-slate-700'}
-                    ${isToday && !isSelected ? 'border border-primary text-primary' : ''}
+                  className={`h-14 rounded-xl flex flex-col items-center justify-start pt-2 text-sm font-medium cursor-pointer relative transition-all border border-transparent
+                    ${isSelected ? 'bg-primary text-white shadow-md scale-105 z-10' : 'hover:bg-slate-50 text-slate-700'}
+                    ${isToday && !isSelected ? 'border-primary text-primary' : ''}
+                    ${hasItems && !isSelected ? 'bg-slate-50/50' : ''}
                   `}
                 >
-                  {day}
-                  {hasItems && !isSelected && (
-                    <div className={`absolute bottom-1 w-1 h-1 rounded-full ${dotColor}`}></div>
-                  )}
+                  <span className="leading-none">{day}</span>
+                  <div className="flex flex-col gap-0.5 mt-1 w-full px-1">
+                    {items.slice(0, 2).map((item: any, idx) => {
+                       let bgClass = "bg-indigo-100";
+                       if (item.type === 'invoice') bgClass = "bg-blue-100";
+                       if (item.type === 'task') bgClass = "bg-green-100";
+                       return (
+                         <div key={idx} className={`h-1.5 w-full rounded-full ${bgClass} ${isSelected ? 'bg-white/30' : ''}`} />
+                       );
+                    })}
+                    {items.length > 2 && (
+                        <div className={`h-1.5 w-1.5 rounded-full mx-auto bg-slate-300 ${isSelected ? 'bg-white/50' : ''}`} />
+                    )}
+                  </div>
                 </div>
               );
             })}
@@ -1005,6 +1032,23 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           </div>
         )}
 
+        {/* Thinking Overlay */}
+        {status === "THINKING" && (
+          <div className="absolute inset-0 z-[60] bg-black/60 backdrop-blur-md flex flex-col items-center justify-center animate-in fade-in duration-300">
+            <div className="relative mb-8">
+              <div className="absolute inset-0 bg-purple-500/30 rounded-full animate-ping blur-xl"></div>
+              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-2xl relative z-10">
+                 <Brain size={48} className="text-purple-600 animate-pulse" />
+              </div>
+              <div className="absolute -bottom-2 -right-2 bg-purple-600 text-white p-2 rounded-full border-4 border-white shadow-lg animate-bounce">
+                <Loader2 size={16} className="animate-spin" />
+              </div>
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">Thinking...</h2>
+            <p className="text-white/60 text-sm font-medium animate-pulse">Analyzing your request</p>
+          </div>
+        )}
+
         <Header />
 
         <main className="flex-1 overflow-y-auto overflow-x-hidden pt-28 pb-32 px-4 scrollbar-hide">
@@ -1053,13 +1097,7 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
             </div>
           )}
 
-          {currentTab === "CALENDAR" && (
-            <div className="space-y-4 animate-in slide-in-from-right duration-300">
-              <h2 className="text-2xl font-bold text-slate-800 mb-4">Upcoming Events</h2>
-              {calendarEvents.map(e => <EventCard key={e.id} event={e} />)}
-              {calendarEvents.length === 0 && <EmptyState message="Calendar is empty." />}
-            </div>
-          )}
+          {currentTab === "CALENDAR" && <CalendarTab />}
 
           {currentTab === "SETTINGS" && <Settings />}
 
