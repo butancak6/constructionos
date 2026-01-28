@@ -1,0 +1,1 @@
+** cors safety issue with webhooks

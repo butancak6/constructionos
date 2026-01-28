@@ -1,0 +1,15 @@
+# Security (The most important part)
+.env
+.env.local
+.env.*.local
+
+# Node Dependencies (Too heavy to push)
+node_modules/
+
+# Build Artifacts (Too heavy to push)
+dist/
+src-tauri/target/
+src-tauri/gen/
+
+# System Files
+.DS_Store

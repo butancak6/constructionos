@@ -1,0 +1,24 @@
+# Handover - Invoice Approval Pipeline Debugging
+
+**Goal**: Fix the "Save Invoice" flow where the app freezes/crashes during PDF generation or Cloud Sync.
+
+## Actions Taken
+1.  **Supabase Migration**: Implemented [src/services/dataService.ts](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/services/dataService.ts) and [src/lib/supabase.ts](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/lib/supabase.ts).
+2.  **Smart Sync**: Added Webhook integration in [Settings.tsx](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/components/Settings.tsx) and [dataService.ts](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/services/dataService.ts).
+3.  **Voice Logic Fix**: Chained [save_audio_blob](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src-tauri/src/lib.rs#649-665) -> [analyze_audio](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src-tauri/src/lib.rs#182-301) in [App.tsx](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/App.tsx) (Voice recording works).
+4.  **Refactoring [handleApproveInvoice](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/App.tsx#257-358)**:
+    *   **Attempt 1**: Sequential pipeline (PDF -> DB -> Webhook). Result: Silent failure/Freeze.
+    *   **Attempt 2**: Aggressive Alerting. Result: Revealed "Step 1" starts, but hanging.
+    *   **Attempt 3 (Current)**: Decoupled PDF generation in [App.tsx](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/App.tsx). Wrapped [generateInvoicePDF](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/pdfGenerator.ts#14-94) in a `try/catch` block to prevent it from blocking the Supabase save.
+
+## Current Status: BROKEN
+The user reports: "The last step didn't work."
+*   **Symptoms**: App freezes or crashes silently during the "Save Invoice" process.
+*   **Current Suspect**: [generateInvoicePDF](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/pdfGenerator.ts#14-94) or the Rust command [save_invoice_pdf](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src-tauri/src/lib.rs#707-734). Even with `try/catch` in JavaScript, if the underlying Rust command panics or hangs the main thread, the JS app will freeze.
+*   **State**: [src/App.tsx](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/App.tsx) has the "Decoupled" logic with alerts (`🚀 Starting Process...`).
+
+## Next Steps for Debugging
+1.  **Rust Layer**: Check [src-tauri/src/lib.rs](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src-tauri/src/lib.rs) -> [save_invoice_pdf](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src-tauri/src/lib.rs#707-734). Ensure it handles file paths/permissions correctly and doesn't panic.
+2.  **PDF Generator**: Review [src/pdfGenerator.ts](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/pdfGenerator.ts). Is `doc.output("datauristring")` generating an overly large string that crashes the bridge?
+3.  **Supabase**: Verify network requests aren't timing out.
+4.  **Isolation**: Try commenting out [generateInvoicePDF](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/pdfGenerator.ts#14-94) entirely in [App.tsx](file:///Users/berk/Documents/antigravity/constructionos/construction_os_v1/src/App.tsx) to see if Supabase save works 100% on its own.
