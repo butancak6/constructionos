@@ -126,6 +126,14 @@ export default function App() {
   const [isSaving, setIsSaving] = useState(false);
   const [debugLogs, setDebugLogs] = useState<string[]>([]); // Visual Debugger State
 
+  // TOAST STATE
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  const showToast = (message: string, type: 'success' | 'error') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
   // Function alias for compatibility with new Groq code
   const setIsProcessing = (isProc: boolean) => setStatus(isProc ? "THINKING" : "IDLE");
   const setShowInvoiceModal = (show: boolean) => { /* No-op, setDraft handles modal visibility */ };
@@ -143,17 +151,53 @@ export default function App() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // --- INIT ---
+  // --- INIT & PERSISTENCE ---
   useEffect(() => {
+    // 1. Hydrate from LocalStorage
+    const storedInvoices = localStorage.getItem("invoices");
+    if (storedInvoices) setInvoices(JSON.parse(storedInvoices));
+
+    const storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) setTasks(JSON.parse(storedTasks));
+
+    const storedClients = localStorage.getItem("clients");
+    if (storedClients) setClients(JSON.parse(storedClients));
+
+    const storedEvents = localStorage.getItem("calendarEvents");
+    if (storedEvents) setCalendarEvents(JSON.parse(storedEvents));
+
+    // 2. Sync with Backend
     async function init() {
       try {
         await invoke("init_db");
+
+        // Hydrate from localStorage
+        const localInvoices = localStorage.getItem("invoices");
+        if (localInvoices) setInvoices(JSON.parse(localInvoices));
+
+        const localTasks = localStorage.getItem("tasks");
+        if (localTasks) setTasks(JSON.parse(localTasks));
+
+        const localClients = localStorage.getItem("clients");
+        if (localClients) setClients(JSON.parse(localClients));
+
         refreshFeed();
         refreshData();
       } catch (e) { console.error(e); }
     }
     init();
   }, []);
+
+  // --- PERSISTENCE ---
+  useEffect(() => { localStorage.setItem("invoices", JSON.stringify(invoices)); }, [invoices]);
+  useEffect(() => { localStorage.setItem("tasks", JSON.stringify(tasks)); }, [tasks]);
+  useEffect(() => { localStorage.setItem("clients", JSON.stringify(clients)); }, [clients]);
+
+  // Persist State to LocalStorage
+  useEffect(() => { localStorage.setItem("invoices", JSON.stringify(invoices)); }, [invoices]);
+  useEffect(() => { localStorage.setItem("tasks", JSON.stringify(tasks)); }, [tasks]);
+  useEffect(() => { localStorage.setItem("clients", JSON.stringify(clients)); }, [clients]);
+  useEffect(() => { localStorage.setItem("calendarEvents", JSON.stringify(calendarEvents)); }, [calendarEvents]);
 
   // EXPOSE DEBUG TOOLS
   useEffect(() => {
@@ -707,8 +751,8 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           )}
           <h1 className="text-xl font-bold tracking-tight text-slate-900 truncate">{getHeaderTitle()}</h1>
         </div>
-        <button className="p-2 text-slate-400 hover:text-slate-600">
-          <MoreVertical size={20} />
+        <button onClick={() => setCurrentTab("SETTINGS")} className="p-2 text-slate-400 hover:text-slate-600">
+          <SettingsIcon size={24} />
         </button>
       </div>
     </header>
@@ -717,7 +761,7 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
 
 
   const NavBar = () => (
-    <nav className="absolute bottom-0 left-0 right-0 h-20 bg-white/95 backdrop-blur-md border-t border-slate-100 flex items-center justify-around px-6 z-50 pb-safe">
+    <nav className="fixed bottom-0 left-0 right-0 h-24 bg-white/95 backdrop-blur-md border-t border-slate-100 flex items-center justify-around px-6 z-50 pb-safe pb-4">
       <NavItem tab="DASHBOARD" label="Home" icon={LayoutDashboard} />
       <NavItem tab="INVOICES" label="Invoices" icon={FileText} />
 
@@ -897,7 +941,7 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
   const InvoiceCard = ({ invoice }: { invoice: Invoice }) => (
     <div
       onClick={() => openInvoice(invoice.id)}
-      className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex justify-between items-center active:scale-95 transition-transform"
+      className="bg-white p-4 rounded-xl shadow-sm border border-stone-200 flex justify-between items-center active:scale-95 transition-transform"
     >
       <div className="flex items-center gap-4">
         <div className={`w-12 h-12 rounded-full flex items-center justify-center ${invoice.status === 'PAID' ? 'bg-green-100 text-green-600' : 'bg-blue-50 text-blue-600'
@@ -905,12 +949,12 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           <FileText size={20} />
         </div>
         <div>
-          <h3 className="font-bold text-slate-800">{invoice.client}</h3>
-          <p className="text-xs text-slate-400 font-medium">#{invoice.id}</p>
+          <h3 className="font-bold text-slate-900">{invoice.client}</h3>
+          <p className="text-xs text-slate-500 font-medium">#{invoice.id}</p>
         </div>
       </div>
       <div className="text-right">
-        <div className="text-lg font-bold text-slate-900">${invoice.amount.toLocaleString()}</div>
+        <div className="text-lg font-black text-slate-900 tracking-tight">${invoice.amount.toLocaleString()}</div>
         <div className={`text-[10px] font-bold px-2 py-0.5 rounded-full inline-block ${invoice.status === 'PAID' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'
           }`}>
           {invoice.status}
@@ -920,38 +964,79 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
   );
 
   const TaskCard = ({ task }: { task: Task }) => (
-    <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-      <div className={`w-3 h-3 rounded-full ${task.priority === 'High' ? 'bg-red-500' : task.priority === 'Medium' ? 'bg-yellow-500' : 'bg-blue-500'
-        }`} />
+    <div className="bg-white p-4 rounded-xl shadow-sm border border-stone-200 flex items-center gap-4 group">
+      <button
+        onClick={() => {
+           setTasks(prev => prev.map(t => t.id === task.id ? { ...t, done: !t.done } : t));
+        }}
+        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
+          task.done ? 'bg-green-500 border-green-500 text-white' : 'border-slate-300'
+        }`}
+      >
+        {task.done && <CheckCircle2 size={14} />}
+      </button>
+
       <div className="flex-1">
-        <p className={`font-medium ${task.done ? 'line-through text-slate-400' : 'text-slate-800'}`}>
+        <p className={`font-bold text-sm ${task.done ? 'line-through text-slate-400' : 'text-slate-900'}`}>
           {task.description}
         </p>
+        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+          task.priority === 'High' ? 'bg-red-100 text-red-600' :
+          task.priority === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
+          'bg-blue-100 text-blue-600'
+        }`}>
+          {task.priority}
+        </span>
       </div>
+
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          if(confirm("Delete this task?")) {
+             setTasks(prev => prev.filter(t => t.id !== task.id));
+             showToast("Task Deleted", "success");
+          }
+        }}
+        className="p-2 text-slate-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+      >
+        <Trash2 size={18} />
+      </button>
     </div>
   );
 
   const EventCard = ({ event }: { event: CalendarEvent }) => (
-    <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+    <div className="bg-white p-4 rounded-xl shadow-sm border border-stone-200 flex items-center gap-4">
       <div className="bg-orange-50 text-orange-600 p-3 rounded-xl">
         <Calendar size={20} />
       </div>
       <div>
-        <p className="font-bold text-slate-800">{event.title}</p>
+        <p className="font-bold text-slate-900">{event.title}</p>
         <p className="text-sm text-slate-500">{new Date(event.start_time).toLocaleString()} ({event.duration_minutes}m)</p>
       </div>
     </div>
   );
 
   const ClientCard = ({ client }: { client: Client }) => (
-    <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+    <div className="bg-white p-4 rounded-xl shadow-sm border border-stone-200 flex items-center gap-4 group">
       <div className="bg-pink-50 text-pink-600 p-3 rounded-full">
         <Users size={20} />
       </div>
-      <div>
-        <p className="font-bold text-slate-800">{client.name}</p>
+      <div className="flex-1">
+        <p className="font-bold text-slate-900">{client.name}</p>
         <p className="text-sm text-slate-500 flex items-center gap-1"><Phone size={12} /> {client.phone || "No Phone"}</p>
       </div>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          if(confirm("Delete this client?")) {
+             setClients(prev => prev.filter(c => c.id !== client.id));
+             showToast("Client Deleted", "success");
+          }
+        }}
+        className="p-2 text-slate-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+      >
+        <Trash2 size={18} />
+      </button>
     </div>
   );
 
@@ -985,6 +1070,18 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
             </div>
           )}
         </div>
+
+        {/* TOAST NOTIFICATION */}
+        {toast && (
+            <div className="absolute top-24 left-1/2 -translate-x-1/2 z-[100] animate-in slide-in-from-top fade-in duration-300">
+                <div className={`px-4 py-3 rounded-full shadow-xl flex items-center gap-2 border ${
+                    toast.type === 'success' ? 'bg-white border-green-200 text-green-700' : 'bg-white border-red-200 text-red-600'
+                }`}>
+                    {toast.type === 'success' ? <CheckCircle2 size={18} className="text-green-500" /> : <AlertCircle size={18} className="text-red-500" />}
+                    <span className="font-bold text-sm">{toast.message}</span>
+                </div>
+            </div>
+        )}
 
         {/* DIAGNOSTIC TEST BUTTON */}
         <button
@@ -1051,20 +1148,50 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
 
         <Header />
 
-        <main className="flex-1 overflow-y-auto overflow-x-hidden pt-28 pb-32 px-4 scrollbar-hide">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden pt-28 pb-36 px-4 scrollbar-hide">
 
           {currentTab === "DASHBOARD" && (
             <div className="space-y-6 animate-in fade-in duration-500">
-              {/* 4-Card Grid Stats */}
-              <div className="grid grid-cols-2 gap-3">
-                <StatCard label="Outstanding" value={stats.outstanding} icon={FileText} colorClass="text-blue-600" />
-                <StatCard label="Paid" value={stats.paid} icon={FileText} colorClass="text-emerald-500" />
-                <StatCard label="Overdue" value={stats.overdue} icon={FileText} colorClass="text-rose-500" />
-                <StatCard label="Drafts" value={stats.unapproved} icon={FileText} colorClass="text-slate-400" />
+              {/* Quick Actions */}
+              <div>
+                <h2 className="text-lg font-black text-slate-900 mb-3 ml-1">Quick Actions</h2>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={startRecordingFlow}
+                    className="bg-blue-600 text-white p-4 rounded-xl shadow-lg shadow-blue-200 active:scale-95 transition-transform flex flex-col items-center justify-center gap-2"
+                  >
+                    <Mic size={24} />
+                    <span className="font-bold text-sm">Record Voice</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                        const name = prompt("Client Name:");
+                        if(name) {
+                            const newClient: Client = { id: `CLI-${Date.now()}`, name };
+                            setClients(prev => [newClient, ...prev]);
+                            showToast("Client Added", "success");
+                        }
+                    }}
+                    className="bg-white text-slate-900 border border-stone-200 p-4 rounded-xl shadow-sm active:scale-95 transition-transform flex flex-col items-center justify-center gap-2"
+                  >
+                    <UserPlus size={24} className="text-blue-600" />
+                    <span className="font-bold text-sm">Add Client</span>
+                  </button>
+                </div>
               </div>
 
+              {/* Today's Agenda */}
               <div>
-                <h2 className="text-lg font-bold text-slate-800 mb-3 ml-1">Recent Invoices</h2>
+                <h2 className="text-lg font-black text-slate-900 mb-3 ml-1">Today's Agenda</h2>
+                <div className="space-y-3">
+                  {tasks.slice(0, 3).map(t => <TaskCard key={t.id} task={t} />)}
+                  {tasks.length === 0 && <EmptyState message="No tasks due soon" />}
+                </div>
+              </div>
+
+              {/* Recent Invoices */}
+              <div>
+                <h2 className="text-lg font-black text-slate-900 mb-3 ml-1">Recent Invoices</h2>
                 <div className="space-y-3">
                   {invoices.slice(0, 3).map(inv => <InvoiceCard key={inv.id} invoice={inv} />)}
                   {invoices.length === 0 && <EmptyState message="No invoices yet" />}
@@ -1098,8 +1225,6 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           )}
 
           {currentTab === "CALENDAR" && <CalendarTab />}
-
-          {currentTab === "SETTINGS" && <Settings />}
 
         </main>
 
