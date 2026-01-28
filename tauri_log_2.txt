@@ -1,0 +1,370 @@
+
+> tauri-app@0.1.0 tauri
+> tauri dev
+
+     Running BeforeDevCommand (`npm run dev`)
+
+> tauri-app@0.1.0 dev
+> vite
+
+
+  VITE v7.3.1  ready in 305 ms
+
+  ➜  Local:   http://localhost:1420/
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+        Info Watching /app/src-tauri for changes...
+[1m[92m   Compiling[0m glib-sys v0.18.1
+[1m[92m   Compiling[0m gobject-sys v0.18.0
+[1m[92m   Compiling[0m glob v0.3.3
+[1m[92m   Compiling[0m pin-utils v0.1.0
+[1m[96m    Building[0m [===>                     ] 104/634: glob, glib-sys(build), gobj…[K[1m[92m   Compiling[0m siphasher v0.3.11
+[1m[96m    Building[0m [===>                     ] 105/634: glob, siphasher, glib-sys(b…[1m[96m    Building[0m [===>                     ] 106/634: glob, siphasher, glib-sys, …[K[1m[92m   Compiling[0m utf8_iter v1.0.4
+[1m[96m    Building[0m [===>                     ] 107/634: glob, siphasher, glib-sys, …[K[1m[92m   Compiling[0m gio-sys v0.18.1
+[1m[96m    Building[0m [===>                     ] 108/634: glob, glib-sys, utf8_iter, …[K[1m[92m   Compiling[0m zerovec v0.11.5
+[1m[96m    Building[0m [===>                     ] 109/634: glob, zerovec, glib-sys, gi…[K[1m[92m   Compiling[0m futures-macro v0.3.31
+[1m[96m    Building[0m [===>                     ] 110/634: glob, zerovec, glib-sys, fu…[1m[96m    Building[0m [===>                     ] 111/634: zerovec, glib-sys, futures-…[K[1m[92m   Compiling[0m getrandom v0.1.16
+[1m[96m    Building[0m [===>                     ] 112/634: zerovec, futures-macro, gob…[K[1m[92m   Compiling[0m futures-task v0.3.31
+[1m[96m    Building[0m [===>                     ] 113/634: futures-task, futures-macro…[1m[96m    Building[0m [===>                     ] 114/634: futures-task, futures-macro…[1m[96m    Building[0m [===>                     ] 115/634: futures-task, futures-macro…[K[1m[92m   Compiling[0m serde v1.0.228
+[1m[96m    Building[0m [===>                     ] 116/634: serde(build.rs), futures-ma…[K[1m[92m   Compiling[0m futures-util v0.3.31
+[1m[96m    Building[0m [===>                     ] 117/634: serde(build.rs), gobject-sy…[K[1m[92m   Compiling[0m byteorder v1.5.0
+[1m[96m    Building[0m [===>                     ] 118/634: serde(build.rs), gio-sys, f…[K[1m[92m   Compiling[0m parking_lot_core v0.9.12
+[1m[96m    Building[0m [===>                     ] 119/634: parking_lot_core(build.rs),…[1m[96m    Building[0m [===>                     ] 120/634: parking_lot_core(build.rs),…[1m[96m    Building[0m [===>                     ] 121/634: parking_lot_core(build.rs),…[1m[96m    Building[0m [===>                     ] 122/634: parking_lot_core(build), gi…[K[1m[92m   Compiling[0m bitflags v1.3.2
+[1m[96m    Building[0m [===>                     ] 123/634: bitflags, gio-sys, futures-…[1m[96m    Building[0m [===>                     ] 124/634: serde, gio-sys, futures-uti…[K[1m[92m   Compiling[0m rand_core v0.5.1
+[1m[96m    Building[0m [===>                     ] 125/634: serde, rand_core, gio-sys, …[K[1m[92m   Compiling[0m tinystr v0.8.2
+[1m[96m    Building[0m [===>                     ] 126/634: serde, tinystr, gio-sys, fu…[K[1m[92m   Compiling[0m futures-channel v0.3.31
+[1m[96m    Building[0m [====>                    ] 127/634: serde, futures-channel, gio…[K[1m[92m   Compiling[0m proc-macro-error-attr v1.0.4
+[1m[96m    Building[0m [====>                    ] 128/634: futures-channel, gio-sys, f…[K[1m[92m   Compiling[0m strsim v0.11.1
+[1m[96m    Building[0m [====>                    ] 129/634: strsim, gio-sys, futures-ut…[K[1m[92m   Compiling[0m scopeguard v1.2.0
+[1m[96m    Building[0m [====>                    ] 130/634: strsim, scopeguard, gio-sys…[K[1m[92m   Compiling[0m ident_case v1.0.1
+[1m[96m    Building[0m [====>                    ] 131/634: strsim, ident_case, gio-sys…[K[1m[92m   Compiling[0m typeid v1.0.3
+[1m[96m    Building[0m [====>                    ] 132/634: typeid(build.rs), strsim, g…[K[1m[92m   Compiling[0m darling_core v0.21.3
+[1m[96m    Building[0m [====>                    ] 133/634: typeid(build.rs), darling_c…[1m[96m    Building[0m [====>                    ] 134/634: darling_core, typeid(build)…[K[1m[92m   Compiling[0m lock_api v0.4.14
+[1m[96m    Building[0m [====>                    ] 135/634: darling_core, lock_api, gio…[1m[96m    Building[0m [====>                    ] 136/634: darling_core, proc-macro-er…[K[1m[92m   Compiling[0m icu_locale_core v2.1.1
+[1m[96m    Building[0m [====>                    ] 137/634: darling_core, icu_locale_co…[K[1m[92m   Compiling[0m potential_utf v0.1.4
+[1m[96m    Building[0m [====>                    ] 138/634: darling_core, icu_locale_co…[K[1m[92m   Compiling[0m phf_macros v0.11.3
+[1m[96m    Building[0m [====>                    ] 139/634: darling_core, icu_locale_co…[K[1m[92m   Compiling[0m zerotrie v0.2.3
+[1m[96m    Building[0m [====>                    ] 140/634: darling_core, zerotrie, phf…[K[1m[92m   Compiling[0m regex-automata v0.4.13
+[1m[96m    Building[0m [====>                    ] 141/634: darling_core, phf_macros, r…[K[1m[92m   Compiling[0m proc-macro-error v1.0.4
+[1m[96m    Building[0m [====>                    ] 142/634: darling_core, proc-macro-er…[K[1m[92m   Compiling[0m erased-serde v0.4.9
+[1m[96m    Building[0m [====>                    ] 143/634: erased-serde(build.rs), dar…[K[1m[92m   Compiling[0m thiserror v2.0.18
+[1m[96m    Building[0m [====>                    ] 144/634: erased-serde(build.rs), dar…[K[1m[92m   Compiling[0m toml_writer v1.0.6+spec-1.1.0
+[1m[96m    Building[0m [====>                    ] 145/634: darling_core, toml_writer, …[1m[96m    Building[0m [====>                    ] 146/634: darling_core, toml_writer, …[1m[96m    Building[0m [====>                    ] 147/634: erased-serde(build), darlin…[1m[96m    Building[0m [====>                    ] 148/634: darling_core, proc-macro-er…[K[1m[92m   Compiling[0m icu_provider v2.1.1
+[1m[96m    Building[0m [====>                    ] 149/634: darling_core, icu_provider,…[K[1m[92m   Compiling[0m icu_collections v2.1.1
+[1m[96m    Building[0m [====>                    ] 150/634: darling_core, icu_provider,…[1m[96m    Building[0m [====>                    ] 151/634: darling_core, proc-macro-er…[1m[96m    Building[0m [====>                    ] 152/634: darling_core, regex-automat…[K[1m[92m   Compiling[0m rand_pcg v0.2.1
+[1m[96m    Building[0m [=====>                   ] 153/634: darling_core, regex-automat…[K[1m[92m   Compiling[0m rand_chacha v0.2.2
+[1m[96m    Building[0m [=====>                   ] 154/634: darling_core, regex-automat…[K[1m[92m   Compiling[0m phf_shared v0.8.0
+[1m[96m    Building[0m [=====>                   ] 155/634: darling_core, phf_shared, r…[K[1m[92m   Compiling[0m darling_macro v0.21.3
+[1m[96m    Building[0m [=====>                   ] 156/634: darling_macro, phf_shared, …[K[1m[92m   Compiling[0m gdk-sys v0.18.2
+[1m[96m    Building[0m [=====>                   ] 157/634: darling_macro, gdk-sys(buil…[K[1m[92m   Compiling[0m thiserror-impl v2.0.18
+[1m[96m    Building[0m [=====>                   ] 158/634: darling_macro, regex-automa…[K[1m[92m   Compiling[0m unic-common v0.9.0
+[1m[96m    Building[0m [=====>                   ] 159/634: unic-common, darling_macro,…[K[1m[92m   Compiling[0m proc-macro-hack v0.5.20+deprecated
+[1m[96m    Building[0m [=====>                   ] 160/634: unic-common, proc-macro-hac…[K[1m[92m   Compiling[0m stable_deref_trait v1.2.1
+[1m[96m    Building[0m [=====>                   ] 161/634: stable_deref_trait, proc-ma…[K[1m[92m   Compiling[0m unic-char-range v0.9.0
+[1m[96m    Building[0m [=====>                   ] 162/634: proc-macro-hack(build.rs), …[K[1m[92m   Compiling[0m unic-char-property v0.9.0
+[1m[96m    Building[0m [=====>                   ] 163/634: unic-char-property, proc-ma…[1m[96m    Building[0m [=====>                   ] 164/634: unic-char-property, proc-ma…[K[1m[92m   Compiling[0m yoke v0.8.1
+[1m[96m    Building[0m [=====>                   ] 165/634: unic-char-property, regex-a…[K[1m[92m   Compiling[0m unic-ucd-version v0.9.0
+[1m[96m    Building[0m [=====>                   ] 166/634: unic-ucd-version, regex-aut…[K[1m[92m   Compiling[0m darling v0.21.3
+[1m[96m    Building[0m [=====>                   ] 167/634: darling, regex-automata, yo…[1m[96m    Building[0m [=====>                   ] 168/634: gdk-sys(build), regex-autom…[K[1m[92m   Compiling[0m rand v0.7.3
+[1m[96m    Building[0m [=====>                   ] 169/634: gdk-sys(build), rand, regex…[1m[96m    Building[0m [=====>                   ] 170/634: rand, proc-macro-error, reg…[K[1m[92m   Compiling[0m phf_shared v0.10.0
+[1m[96m    Building[0m [=====>                   ] 171/634: rand, regex-automata, phf_s…[K[1m[92m   Compiling[0m rustc_version v0.4.1
+[1m[96m    Building[0m [=====>                   ] 172/634: rand, rustc_version, regex-…[K[1m[92m   Compiling[0m regex v1.12.2
+[1m[96m    Building[0m [=====>                   ] 173/634: regex, rand, regex-automata…[K[1m[92m   Compiling[0m getrandom v0.3.4
+[1m[96m    Building[0m [=====>                   ] 174/634: getrandom(build.rs), regex,…[1m[96m    Building[0m [=====>                   ] 175/634: getrandom(build.rs), regex,…[K[1m[92m   Compiling[0m serde_json v1.0.149
+[1m[96m    Building[0m [=====>                   ] 176/634: getrandom(build.rs), regex,…[K[1m[92m   Compiling[0m alloc-no-stdlib v2.0.4
+[1m[96m    Building[0m [=====>                   ] 177/634: getrandom(build.rs), regex,…[K[1m[92m   Compiling[0m new_debug_unreachable v1.0.6
+[1m[96m    Building[0m [======>                  ] 178/634: regex, alloc-no-stdlib, new…[1m[96m    Building[0m [======>                  ] 179/634: regex, alloc-no-stdlib, reg…[1m[96m    Building[0m [======>                  ] 180/634: regex, alloc-no-stdlib, ser…[K[1m[92m   Compiling[0m phf_generator v0.8.0
+[1m[96m    Building[0m [======>                  ] 181/634: phf_generator, regex, alloc…[K[1m[92m   Compiling[0m phf_generator v0.10.0
+[1m[96m    Building[0m [======>                  ] 182/634: phf_generator, alloc-no-std…[K[1m[92m   Compiling[0m alloc-stdlib v0.2.2
+[1m[96m    Building[0m [======>                  ] 183/634: phf_generator, alloc-stdlib…[K[1m[92m   Compiling[0m serde_with_macros v3.16.1
+[1m[96m    Building[0m [======>                  ] 184/634: phf_generator, alloc-stdlib…[K[1m[92m   Compiling[0m unic-ucd-ident v0.9.0
+[1m[96m    Building[0m [======>                  ] 185/634: phf_generator, serde_with_m…[1m[96m    Building[0m [======>                  ] 186/634: serde_with_macros, proc-mac…[K[1m[92m   Compiling[0m icu_normalizer v2.1.1
+[1m[96m    Building[0m [======>                  ] 187/634: serde_with_macros, proc-mac…[K[1m[92m   Compiling[0m icu_properties v2.1.2
+[1m[96m    Building[0m [======>                  ] 188/634: serde_with_macros, icu_prop…[1m[96m    Building[0m [======>                  ] 189/634: serde_with_macros, icu_prop…[K[1m[92m   Compiling[0m phf_codegen v0.11.3
+[1m[96m    Building[0m [======>                  ] 190/634: serde_with_macros, icu_prop…[K[1m[92m   Compiling[0m string_cache_codegen v0.5.4
+[1m[96m    Building[0m [======>                  ] 191/634: icu_properties, phf_codegen…[K[1m[92m   Compiling[0m proc-macro-crate v2.0.2
+[1m[96m    Building[0m [======>                  ] 192/634: icu_properties, proc-macro-…[K[1m[92m   Compiling[0m precomputed-hash v0.1.1
+[1m[96m    Building[0m [======>                  ] 193/634: precomputed-hash, icu_prope…[K[1m[92m   Compiling[0m crossbeam-utils v0.8.21
+[1m[96m    Building[0m [======>                  ] 194/634: crossbeam-utils(build.rs), …[K[1m[92m   Compiling[0m mac v0.1.1
+[1m[96m    Building[0m [======>                  ] 195/634: mac, icu_properties, proc-m…[K[1m[92m   Compiling[0m anyhow v1.0.100
+[1m[96m    Building[0m [======>                  ] 196/634: icu_properties, proc-macro-…[K[1m[92m   Compiling[0m heck v0.4.1
+[1m[96m    Building[0m [======>                  ] 197/634: heck, icu_properties, proc-…[K[1m[92m   Compiling[0m markup5ever v0.14.1
+[1m[96m    Building[0m [======>                  ] 198/634: heck, icu_properties, anyho…[K[1m[92m   Compiling[0m glib-macros v0.18.5
+[1m[96m    Building[0m [======>                  ] 199/634: glib-macros, icu_properties…[1m[96m    Building[0m [======>                  ] 200/634: glib-macros, icu_properties…[K[1m[92m   Compiling[0m futf v0.1.5
+[1m[96m    Building[0m [======>                  ] 201/634: glib-macros, icu_properties…[1m[96m    Building[0m [======>                  ] 202/634: glib-macros, icu_properties…[K[1m[92m   Compiling[0m parking_lot v0.12.5
+[1m[96m    Building[0m [=======>                 ] 203/634: glib-macros, icu_properties…[K[1m[92m   Compiling[0m idna_adapter v1.2.1
+[1m[96m    Building[0m [=======>                 ] 204/634: glib-macros, icu_properties…[K[1m[92m   Compiling[0m phf_macros v0.10.0
+[1m[96m    Building[0m [=======>                 ] 205/634: glib-macros, icu_properties…[K[1m[92m   Compiling[0m phf_codegen v0.8.0
+[1m[96m    Building[0m [=======>                 ] 206/634: phf_codegen, glib-macros, p…[K[1m[92m   Compiling[0m brotli-decompressor v5.0.0
+[1m[96m    Building[0m [=======>                 ] 207/634: glib-macros, phf_macros, br…[1m[96m    Building[0m [=======>                 ] 208/634: glib-macros, phf_macros, br…[1m[96m    Building[0m [=======>                 ] 209/634: glib-macros, getrandom, bro…[1m[96m    Building[0m [=======>                 ] 210/634: glib-macros, zerovec, brotl…[K[1m[92m   Compiling[0m futures-executor v0.3.31
+[1m[96m    Building[0m [=======>                 ] 211/634: glib-macros, futures-execut…[K[1m[92m   Compiling[0m cssparser v0.29.6
+[1m[96m    Building[0m [=======>                 ] 212/634: glib-macros, futures-execut…[K[1m[92m   Compiling[0m gdk-pixbuf-sys v0.18.0
+[1m[96m    Building[0m [=======>                 ] 213/634: glib-macros, futures-execut…[K[1m[92m   Compiling[0m pango-sys v0.18.0
+[1m[96m    Building[0m [=======>                 ] 214/634: glib-macros, cssparser(buil…[K[1m[92m   Compiling[0m cairo-sys-rs v0.18.2
+[1m[96m    Building[0m [=======>                 ] 215/634: glib-macros, cssparser(buil…[K[1m[92m   Compiling[0m serde_spanned v1.0.4
+[1m[96m    Building[0m [=======>                 ] 216/634: serde_spanned, glib-macros,…[K[1m[92m   Compiling[0m utf-8 v0.7.6
+[1m[96m    Building[0m [=======>                 ] 217/634: serde_spanned, glib-macros,…[K[1m[92m   Compiling[0m same-file v1.0.6
+[1m[96m    Building[0m [=======>                 ] 218/634: glib-macros, utf-8, csspars…[K[1m[92m   Compiling[0m dtoa v1.0.11
+[1m[96m    Building[0m [=======>                 ] 219/634: glib-macros, dtoa, cssparse…[K[1m[92m   Compiling[0m percent-encoding v2.3.2
+[1m[96m    Building[0m [=======>                 ] 220/634: glib-macros, dtoa, cssparse…[K[1m[92m   Compiling[0m dunce v1.0.5
+[1m[96m    Building[0m [=======>                 ] 221/634: glib-macros, cssparser(buil…[K[1m[92m   Compiling[0m dtoa-short v0.3.5
+[1m[96m    Building[0m [=======>                 ] 222/634: glib-macros, dtoa-short, cs…[K[1m[92m   Compiling[0m form_urlencoded v1.2.2
+[1m[96m    Building[0m [=======>                 ] 223/634: glib-macros, dtoa-short, cs…[K[1m[92m   Compiling[0m walkdir v2.5.0
+[1m[96m    Building[0m [=======>                 ] 224/634: glib-macros, cssparser(buil…[K[1m[92m   Compiling[0m tendril v0.4.3
+[1m[96m    Building[0m [=======>                 ] 225/634: glib-macros, cssparser(buil…[K[1m[92m   Compiling[0m toml v0.9.11+spec-1.1.0
+[1m[96m    Building[0m [=======>                 ] 226/634: glib-macros, cssparser(buil…[1m[96m    Building[0m [=======>                 ] 227/634: glib-macros, cairo-sys-rs(b…[1m[96m    Building[0m [=======>                 ] 228/634: glib-macros, pango-sys(buil…[1m[96m    Building[0m [========>                ] 229/634: gdk-pixbuf-sys(build), glib…[K[1m[92m   Compiling[0m brotli v8.0.2
+[1m[96m    Building[0m [========>                ] 230/634: brotli, glib-macros, csspar…[1m[96m    Building[0m [========>                ] 231/634: brotli, cssparser(build), g…[K[1m[92m   Compiling[0m uuid v1.19.0
+[1m[96m    Building[0m [========>                ] 232/634: brotli, glib-macros, uuid, …[K[1m[92m   Compiling[0m glib v0.18.5
+[1m[96m    Building[0m [========>                ] 233/634: brotli, glib, uuid, toml    [K[1m[92m   Compiling[0m phf v0.10.1
+[1m[96m    Building[0m [========>                ] 234/634: brotli, glib, phf, toml     [K[1m[92m   Compiling[0m selectors v0.24.0
+[1m[96m    Building[0m [========>                ] 235/634: brotli, glib, selectors(bui…[K[1m[92m   Compiling[0m string_cache v0.8.9
+[1m[96m    Building[0m [========>                ] 236/634: brotli, glib, string_cache,…[K[1m[92m   Compiling[0m idna v1.1.0
+[1m[96m    Building[0m [========>                ] 237/634: brotli, glib, idna, toml    [1m[96m    Building[0m [========>                ] 238/634: brotli, glib, idna, markup5…[1m[96m    Building[0m [========>                ] 239/634: brotli, glib, crossbeam-uti…[1m[96m    Building[0m [========>                ] 240/634: brotli, glib, anyhow, cross…[K[1m[92m   Compiling[0m phf v0.11.3
+[1m[96m    Building[0m [========>                ] 241/634: brotli, glib, anyhow, phf   [K[1m[92m   Compiling[0m indexmap v1.9.3
+[1m[96m    Building[0m [========>                ] 242/634: brotli, glib, phf, indexmap…[K[1m[92m   Compiling[0m atk-sys v0.18.2
+[1m[96m    Building[0m [========>                ] 243/634: brotli, glib, atk-sys(build…[K[1m[92m   Compiling[0m cssparser-macros v0.6.1
+[1m[96m    Building[0m [========>                ] 244/634: brotli, glib, atk-sys(build…[K[1m[92m   Compiling[0m ctor v0.2.9
+[1m[96m    Building[0m [========>                ] 245/634: brotli, glib, ctor, csspars…[K[1m[92m   Compiling[0m camino v1.2.2
+[1m[96m    Building[0m [========>                ] 246/634: brotli, glib, ctor, camino(…[K[1m[92m   Compiling[0m nodrop v0.1.14
+[1m[96m    Building[0m [========>                ] 247/634: brotli, glib, nodrop, camin…[K[1m[92m   Compiling[0m convert_case v0.4.0
+[1m[96m    Building[0m [========>                ] 248/634: brotli, glib, convert_case,…[K[1m[92m   Compiling[0m matches v0.1.10
+[1m[96m    Building[0m [========>                ] 249/634: brotli, glib, convert_case,…[1m[96m    Building[0m [========>                ] 250/634: brotli, glib, convert_case,…[K[1m[92m   Compiling[0m derive_more v0.99.20
+[1m[96m    Building[0m [========>                ] 251/634: brotli, glib, derive_more, …[1m[96m    Building[0m [========>                ] 252/634: camino(build), glib, derive…[K[1m[92m   Compiling[0m servo_arc v0.2.0
+[1m[96m    Building[0m [========>                ] 253/634: glib, derive_more, servo_ar…[1m[96m    Building[0m [=========>               ] 254/634: atk-sys(build), glib, deriv…[1m[96m    Building[0m [=========>               ] 255/634: glib, derive_more, indexmap…[1m[96m    Building[0m [=========>               ] 256/634: glib, derive_more, markup5e…[K[1m[92m   Compiling[0m url v2.5.8
+[1m[96m    Building[0m [=========>               ] 257/634: glib, derive_more, markup5e…[1m[96m    Building[0m [=========>               ] 258/634: glib, derive_more, selector…[1m[96m    Building[0m [=========>               ] 259/634: glib, derive_more, gdk-pixb…[1m[96m    Building[0m [=========>               ] 260/634: glib, derive_more, pango-sy…[1m[96m    Building[0m [=========>               ] 261/634: cairo-sys-rs, glib, derive_…[K[1m[92m   Compiling[0m phf v0.8.0
+[1m[96m    Building[0m [=========>               ] 262/634: glib, derive_more, pango-sy…[K[1m[92m   Compiling[0m fxhash v0.2.1
+[1m[96m    Building[0m [=========>               ] 263/634: fxhash, glib, derive_more, …[K[1m[92m   Compiling[0m match_token v0.1.0
+[1m[96m    Building[0m [=========>               ] 264/634: fxhash, glib, derive_more, …[K[1m[92m   Compiling[0m serde_derive_internals v0.29.1
+[1m[96m    Building[0m [=========>               ] 265/634: glib, derive_more, match_to…[K[1m[92m   Compiling[0m schemars v0.8.22
+[1m[96m    Building[0m [=========>               ] 266/634: glib, derive_more, schemars…[K[1m[92m   Compiling[0m hashbrown v0.12.3
+[1m[96m    Building[0m [=========>               ] 267/634: glib, derive_more, serde_de…[K[1m[92m   Compiling[0m schemars_derive v0.8.22
+[1m[96m    Building[0m [=========>               ] 268/634: glib, derive_more, schemars…[1m[96m    Building[0m [=========>               ] 269/634: glib, schemars_derive, sele…[1m[96m    Building[0m [=========>               ] 270/634: glib, schemars_derive, sele…[1m[96m    Building[0m [=========>               ] 271/634: glib, schemars_derive, sele…[K[1m[92m   Compiling[0m html5ever v0.29.1
+[1m[96m    Building[0m [=========>               ] 272/634: glib, schemars_derive, sele…[1m[96m    Building[0m [=========>               ] 273/634: glib, schemars_derive, cami…[K[1m[92m   Compiling[0m cfb v0.7.3
+[1m[96m    Building[0m [=========>               ] 274/634: glib, cfb, camino, html5ever[1m[96m    Building[0m [=========>               ] 275/634: tinystr, glib, cfb, html5ev…[K[1m[92m   Compiling[0m jsonptr v0.6.3
+[1m[96m    Building[0m [=========>               ] 276/634: tinystr, glib, cfb, jsonptr [1m[96m    Building[0m [=========>               ] 277/634: glib, cfb, jsonptr, erased-…[K[1m[92m   Compiling[0m cargo-platform v0.1.9
+[1m[96m    Building[0m [=========>               ] 278/634: cargo-platform, glib, cfb, …[1m[96m    Building[0m [==========>              ] 279/634: cargo-platform, glib, perce…[K[1m[92m   Compiling[0m gio v0.18.4
+[1m[96m    Building[0m [==========>              ] 280/634: cargo-platform, glib, gio(b…[K[1m[92m   Compiling[0m dyn-clone v1.0.20
+[1m[96m    Building[0m [==========>              ] 281/634: glib, gio(build.rs), percen…[1m[96m    Building[0m [==========>              ] 282/634: glib, gio(build.rs), percen…[1m[96m    Building[0m [==========>              ] 283/634: glib, gio(build), percent-e…[K[1m[92m   Compiling[0m cargo_metadata v0.19.2
+[1m[96m    Building[0m [==========>              ] 284/634: glib, percent-encoding, sch…[K[1m[92m   Compiling[0m serde-untagged v0.1.9
+[1m[96m    Building[0m [==========>              ] 285/634: serde-untagged, glib, schem…[K[1m[92m   Compiling[0m infer v0.19.0
+[1m[96m    Building[0m [==========>              ] 286/634: infer, glib, schemars, carg…[K[1m[92m   Compiling[0m json-patch v3.0.1
+[1m[96m    Building[0m [==========>              ] 287/634: json-patch, glib, schemars,…[1m[96m    Building[0m [==========>              ] 288/634: glib, schemars, icu_locale_…[K[1m[92m   Compiling[0m kuchikiki v0.8.8-speedreader
+[1m[96m    Building[0m [==========>              ] 289/634: glib, kuchikiki, icu_locale…[1m[96m    Building[0m [==========>              ] 290/634: gdk-sys, kuchikiki, icu_loc…[K[1m[92m   Compiling[0m urlpattern v0.3.0
+[1m[96m    Building[0m [==========>              ] 291/634: gdk-sys, kuchikiki, urlpatt…[1m[96m    Building[0m [==========>              ] 292/634: gdk-sys, potential_utf, url…[K[1m[92m   Compiling[0m serde_with v3.16.1
+[1m[96m    Building[0m [==========>              ] 293/634: gdk-sys, serde_with, urlpat…[1m[96m    Building[0m [==========>              ] 294/634: serde_with, zerotrie, urlpa…[K[1m[92m   Compiling[0m gtk-sys v0.18.2
+[1m[96m    Building[0m [==========>              ] 295/634: serde_with, zerotrie, urlpa…[K[1m[92m   Compiling[0m option-ext v0.2.0
+[1m[96m    Building[0m [==========>              ] 296/634: serde_with, zerotrie, optio…[1m[96m    Building[0m [==========>              ] 297/634: gtk-sys(build), serde_with,…[1m[96m    Building[0m [==========>              ] 298/634: gtk-sys(build), serde_with,…[1m[96m    Building[0m [==========>              ] 299/634: icu_collections, serde_with…[1m[96m    Building[0m [==========>              ] 300/634: gio, icu_collections, serde…[K[1m[92m   Compiling[0m socket2 v0.6.1
+[1m[96m    Building[0m [==========>              ] 301/634: gio, icu_collections, serde…[K[1m[92m   Compiling[0m mio v1.1.1
+[1m[96m    Building[0m [==========>              ] 302/634: gio, serde_with, socket2, m…[K[1m[92m   Compiling[0m tokio v1.49.0
+[1m[96m    Building[0m [==========>              ] 303/634: gio, tokio, serde_with, mio [K[1m[92m   Compiling[0m vcpkg v0.2.15
+[1m[96m    Building[0m [==========>              ] 304/634: gio, tokio, serde_with, vcp…[K[1m[92m   Compiling[0m tauri-utils v2.8.1
+[1m[96m    Building[0m [===========>             ] 305/634: gio, tokio, tauri-utils, vc…[1m[96m    Building[0m [===========>             ] 306/634: gio, tokio, tauri-utils, ic…[1m[96m    Building[0m [===========>             ] 307/634: gio, tokio, tauri-utils, ic…[K[1m[92m   Compiling[0m dirs-sys v0.5.0
+[1m[96m    Building[0m [===========>             ] 308/634: gio, tokio, tauri-utils, di…[1m[96m    Building[0m [===========>             ] 309/634: gio, tokio, tauri-utils, at…[K[1m[92m   Compiling[0m memoffset v0.9.1
+[1m[96m    Building[0m [===========>             ] 310/634: gio, tokio, tauri-utils, me…[K[1m[92m   Compiling[0m parking v2.2.1
+[1m[96m    Building[0m [===========>             ] 311/634: gio, tokio, tauri-utils, pa…[1m[96m    Building[0m [===========>             ] 312/634: gio, tokio, tauri-utils, me…[K[1m[92m   Compiling[0m dirs v6.0.0
+[1m[96m    Building[0m [===========>             ] 313/634: gio, tokio, tauri-utils, di…[1m[96m    Building[0m [===========>             ] 314/634: gio, tokio, tauri-utils, id…[1m[96m    Building[0m [===========>             ] 315/634: gio, tokio, tauri-utils, fo…[K[1m[92m   Compiling[0m cairo-rs v0.18.5
+[1m[96m    Building[0m [===========>             ] 316/634: gio, tokio, tauri-utils, ca…[K[1m[92m   Compiling[0m concurrent-queue v2.5.0
+[1m[96m    Building[0m [===========>             ] 317/634: gio, tokio, tauri-utils, co…[K[1m[92m   Compiling[0m field-offset v0.3.6
+[1m[96m    Building[0m [===========>             ] 318/634: gio, tokio, tauri-utils, fi…[K[1m[92m   Compiling[0m toml_edit v0.19.15
+[1m[96m    Building[0m [===========>             ] 319/634: gio, tokio, tauri-utils, to…[1m[96m    Building[0m [===========>             ] 320/634: gio, serde_json(build.rs), …[K[1m[92m   Compiling[0m crc32fast v1.5.0
+[1m[96m    Building[0m [===========>             ] 321/634: gio, tauri-utils, crc32fast…[K[1m[92m   Compiling[0m adler2 v2.0.1
+[1m[96m    Building[0m [===========>             ] 322/634: gio, tauri-utils, adler2, t…[K[1m[92m   Compiling[0m typenum v1.19.0
+[1m[96m    Building[0m [===========>             ] 323/634: gio, tauri-utils, toml_edit…[1m[96m    Building[0m [===========>             ] 324/634: gio, typenum(build), tauri-…[1m[96m    Building[0m [===========>             ] 325/634: gio, crc32fast(build), taur…[1m[96m    Building[0m [===========>             ] 326/634: gio, serde_json(build), tau…[1m[96m    Building[0m [===========>             ] 327/634: gio, tauri-utils, toml_edit…[1m[96m    Building[0m [===========>             ] 328/634: gio, tauri-utils, idna, tom…[1m[96m    Building[0m [===========>             ] 329/634: gio, memoffset, tauri-utils…[1m[96m    Building[0m [============>            ] 330/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m proc-macro-crate v1.3.1
+[1m[96m    Building[0m [============>            ] 331/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m embed-resource v3.0.6
+[1m[96m    Building[0m [============>            ] 332/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m generic-array v0.14.7
+[1m[96m    Building[0m [============>            ] 333/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m javascriptcore-rs-sys v1.1.1
+[1m[96m    Building[0m [============>            ] 334/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m soup3-sys v0.5.0
+[1m[96m    Building[0m [============>            ] 335/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m gtk v0.18.2
+[1m[96m    Building[0m [============>            ] 336/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m lazy_static v1.5.0
+[1m[96m    Building[0m [============>            ] 337/634: gio, gtk-sys, tauri-utils, …[1m[96m    Building[0m [============>            ] 338/634: gio, gtk-sys, tauri-utils, …[1m[96m    Building[0m [============>            ] 339/634: gio, gtk-sys, tauri-utils, …[1m[96m    Building[0m [============>            ] 340/634: gio, gtk-sys, tauri-utils, …[1m[96m    Building[0m [============>            ] 341/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m tauri-winres v0.3.5
+[1m[96m    Building[0m [============>            ] 342/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m gtk3-macros v0.18.2
+[1m[96m    Building[0m [============>            ] 343/634: gio, gtk-sys, tauri-utils, …[1m[96m    Building[0m [============>            ] 344/634: gio, gtk-sys, tauri-utils, …[1m[96m    Building[0m [============>            ] 345/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m pango v0.18.3
+[1m[96m    Building[0m [============>            ] 346/634: gio, gtk-sys, tauri-utils, …[K[1m[92m   Compiling[0m gdk-pixbuf v0.18.5
+[1m[96m    Building[0m [============>            ] 347/634: gio, tauri-utils, pango, gd…[1m[96m    Building[0m [============>            ] 348/634: gio, tauri-utils, pango, se…[K[1m[92m   Compiling[0m gdk v0.18.2
+[1m[96m    Building[0m [============>            ] 349/634: gio, tauri-utils, gdk, serd…[1m[96m    Building[0m [============>            ] 350/634: gio, tauri-utils, crc32fast…[1m[96m    Building[0m [============>            ] 351/634: tauri-utils, crc32fast, typ…[K[1m[92m   Compiling[0m atk v0.18.2
+[1m[96m    Building[0m [============>            ] 352/634: tauri-utils, typenum, gdk, …[K[1m[92m   Compiling[0m cargo_toml v0.22.3
+[1m[96m    Building[0m [============>            ] 353/634: cargo_toml, typenum, gdk, a…[1m[96m    Building[0m [============>            ] 354/634: cargo_toml, regex-automata,…[K[1m[92m   Compiling[0m webkit2gtk-sys v2.0.1
+[1m[96m    Building[0m [============>            ] 355/634: cargo_toml, regex-automata,…[K[1m[92m   Compiling[0m x11 v2.21.0
+[1m[96m    Building[0m [=============>           ] 356/634: cargo_toml, x11(build.rs), …[K[1m[92m   Compiling[0m simd-adler32 v0.3.8
+[1m[96m    Building[0m [=============>           ] 357/634: cargo_toml, simd-adler32, r…[K[1m[92m   Compiling[0m base64 v0.22.1
+[1m[96m    Building[0m [=============>           ] 358/634: cargo_toml, base64, regex-a…[K[1m[92m   Compiling[0m atomic-waker v1.1.2
+[1m[96m    Building[0m [=============>           ] 359/634: cargo_toml, regex-automata,…[1m[96m    Building[0m [=============>           ] 360/634: x11(build), regex-automata,…[1m[96m    Building[0m [=============>           ] 361/634: gtk, regex-automata, gdk, a…[1m[96m    Building[0m [=============>           ] 362/634: gtk, regex-automata, gdk, w…[K[1m[92m   Compiling[0m tauri-build v2.5.3
+[1m[96m    Building[0m [=============>           ] 363/634: gtk, tauri-build, regex-aut…[1m[96m    Building[0m [=============>           ] 364/634: gtk, tauri-build, regex-aut…[1m[96m    Building[0m [=============>           ] 365/634: gtk, tauri-build, regex-aut…[1m[96m    Building[0m [=============>           ] 366/634: gtk, soup3-sys, regex-autom…[K[1m[92m   Compiling[0m openssl-sys v0.9.111
+[1m[96m    Building[0m [=============>           ] 367/634: gtk, soup3-sys, regex-autom…[K[1m[92m   Compiling[0m clang-sys v1.8.1
+[1m[96m    Building[0m [=============>           ] 368/634: gtk, clang-sys(build.rs), r…[K[1m[92m   Compiling[0m toml_edit v0.23.10+spec-1.0.0
+[1m[96m    Building[0m [=============>           ] 369/634: gtk, clang-sys(build.rs), r…[K[1m[92m   Compiling[0m ring v0.17.14
+[1m[96m    Building[0m [=============>           ] 370/634: gtk, regex-automata, toml_e…[K[1m[92m   Compiling[0m tracing-core v0.1.36
+[1m[96m    Building[0m [=============>           ] 371/634: gtk, tracing-core, toml_edi…[K[1m[92m   Compiling[0m gdkx11-sys v0.18.2
+[1m[96m    Building[0m [=============>           ] 372/634: gtk, gdkx11-sys(build.rs), …[1m[96m    Building[0m [=============>           ] 373/634: gtk, uuid, tracing-core, to…[K[1m[92m   Compiling[0m tracing-attributes v0.1.31
+[1m[96m    Building[0m [=============>           ] 374/634: gtk, tracing-core, toml_edi…[K[1m[92m   Compiling[0m enumflags2_derive v0.7.12
+[1m[96m    Building[0m [=============>           ] 375/634: gtk, tracing-core, enumflag…[K[1m[92m   Compiling[0m num-conv v0.1.0
+[1m[96m    Building[0m [=============>           ] 376/634: gtk, num-conv, enumflags2_d…[K[1m[92m   Compiling[0m powerfmt v0.2.0
+[1m[96m    Building[0m [=============>           ] 377/634: gtk, powerfmt, enumflags2_d…[K[1m[92m   Compiling[0m prettyplease v0.2.37
+[1m[96m    Building[0m [=============>           ] 378/634: gtk, enumflags2_derive, pre…[K[1m[92m   Compiling[0m zeroize v1.8.2
+[1m[96m    Building[0m [=============>           ] 379/634: gtk, zeroize, enumflags2_de…[K[1m[92m   Compiling[0m time-core v0.1.7
+[1m[96m    Building[0m [=============>           ] 380/634: gtk, zeroize, time-core, tr…[K[1m[92m   Compiling[0m rustix v0.38.44
+[1m[96m    Building[0m [==============>          ] 381/634: gtk, rustix(build.rs), time…[K[1m[92m   Compiling[0m proc-macro2 v1.0.106
+[1m[96m    Building[0m [==============>          ] 382/634: gtk, rustix(build.rs), proc…[K[1m[92m   Compiling[0m fastrand v2.3.0
+[1m[96m    Building[0m [==============>          ] 383/634: gtk, fastrand, proc-macro2(…[1m[96m    Building[0m [==============>          ] 384/634: gtk, fastrand, proc-macro2(…[1m[96m    Building[0m [==============>          ] 385/634: gtk, fastrand, rustix(build…[K[1m[92m   Compiling[0m time-macros v0.2.25
+[1m[96m    Building[0m [==============>          ] 386/634: gtk, fastrand, time-macros,…[K[1m[92m   Compiling[0m rustls-pki-types v1.14.0
+[1m[96m    Building[0m [==============>          ] 387/634: gtk, rustls-pki-types, time…[K[1m[92m   Compiling[0m tracing v0.1.44
+[1m[96m    Building[0m [==============>          ] 388/634: gtk, rustls-pki-types, trac…[1m[96m    Building[0m [==============>          ] 389/634: gtk, rustls-pki-types, pret…[K[1m[92m   Compiling[0m deranged v0.5.5
+[1m[96m    Building[0m [==============>          ] 390/634: gtk, rustls-pki-types, dera…[1m[96m    Building[0m [==============>          ] 391/634: gtk, deranged, time-macros,…[K[1m[92m   Compiling[0m proc-macro-crate v3.4.0
+[1m[96m    Building[0m [==============>          ] 392/634: gtk, deranged, proc-macro-c…[1m[96m    Building[0m [==============>          ] 393/634: gtk, deranged, proc-macro-c…[1m[96m    Building[0m [==============>          ] 394/634: gtk, deranged, clang-sys(bu…[1m[96m    Building[0m [==============>          ] 395/634: gtk, deranged, openssl-sys(…[1m[96m    Building[0m [==============>          ] 396/634: gtk, deranged, x11, ring(bu…[K[1m[92m   Compiling[0m miniz_oxide v0.8.9
+[1m[96m    Building[0m [==============>          ] 397/634: gtk, x11, miniz_oxide, ring…[K[1m[92m   Compiling[0m event-listener v5.4.1
+[1m[96m    Building[0m [==============>          ] 398/634: gtk, x11, event-listener, r…[K[1m[92m   Compiling[0m dpi v0.1.2
+[1m[96m    Building[0m [==============>          ] 399/634: gtk, dpi, event-listener, r…[K[1m[92m   Compiling[0m zvariant_utils v3.3.0
+[1m[96m    Building[0m [==============>          ] 400/634: gtk, zvariant_utils, dpi, r…[K[1m[92m   Compiling[0m cookie v0.18.1
+[1m[96m    Building[0m [==============>          ] 401/634: gtk, zvariant_utils, cookie…[K[1m[92m   Compiling[0m x11-dl v2.21.0
+[1m[96m    Building[0m [==============>          ] 402/634: gtk, zvariant_utils, x11-dl…[K[1m[92m   Compiling[0m minimal-lexical v0.2.1
+[1m[96m    Building[0m [==============>          ] 403/634: gtk, zvariant_utils, minima…[K[1m[92m   Compiling[0m either v1.15.0
+[1m[96m    Building[0m [==============>          ] 404/634: gtk, either, minimal-lexica…[K[1m[92m   Compiling[0m rustix v1.1.3
+[1m[96m    Building[0m [==============>          ] 405/634: gtk, either, rustix(build.r…[K[1m[92m   Compiling[0m linux-raw-sys v0.4.15
+[1m[96m    Building[0m [===============>         ] 406/634: gtk, linux-raw-sys, rustix(…[K[1m[92m   Compiling[0m bitflags v2.10.0
+[1m[96m    Building[0m [===============>         ] 407/634: gtk, linux-raw-sys, bitflag…[1m[96m    Building[0m [===============>         ] 408/634: gtk, linux-raw-sys, rustix,…[1m[96m    Building[0m [===============>         ] 409/634: gtk, rustix(build), rustix,…[K[1m[92m   Compiling[0m nom v7.1.3
+[1m[96m    Building[0m [===============>         ] 410/634: gtk, nom, rustix, ring(buil…[K[1m[92m   Compiling[0m zvariant_derive v5.9.2
+[1m[96m    Building[0m [===============>         ] 411/634: gtk, rustix, zvariant_deriv…[1m[96m    Building[0m [===============>         ] 412/634: gtk, x11-dl(build), zvarian…[1m[96m    Building[0m [===============>         ] 413/634: gtk, cookie(build), zvarian…[K[1m[92m   Compiling[0m event-listener-strategy v0.5.4
+[1m[96m    Building[0m [===============>         ] 414/634: gtk, event-listener-strateg…[1m[96m    Building[0m [===============>         ] 415/634: gtk, zvariant_derive, gdkx1…[K[1m[92m   Compiling[0m flate2 v1.1.8
+[1m[96m    Building[0m [===============>         ] 416/634: gtk, flate2, zvariant_deriv…[K[1m[92m   Compiling[0m time v0.3.45
+[1m[96m    Building[0m [===============>         ] 417/634: gtk, flate2, time, ring(bui…[K[1m[92m   Compiling[0m futures-lite v2.6.1
+[1m[96m    Building[0m [===============>         ] 418/634: gtk, futures-lite, time, ri…[1m[96m    Building[0m [===============>         ] 419/634: gtk, futures-lite, proc-mac…[1m[96m    Building[0m [===============>         ] 420/634: gtk, proc-macro2, time, cfb [K[1m[92m   Compiling[0m soup3 v0.5.0
+[1m[96m    Building[0m [===============>         ] 421/634: gtk, soup3, time, cfb       [1m[96m    Building[0m [===============>         ] 422/634: gtk, soup3, time, webkit2gt…[K[1m[92m   Compiling[0m javascriptcore-rs v1.1.2
+[1m[96m    Building[0m [===============>         ] 423/634: gtk, soup3, javascriptcore-…[K[1m[92m   Compiling[0m tauri v2.9.5
+[1m[96m    Building[0m [===============>         ] 424/634: gtk, soup3, tauri(build.rs)…[K[1m[92m   Compiling[0m crypto-common v0.1.7
+[1m[96m    Building[0m [===============>         ] 425/634: gtk, soup3, tauri(build.rs)…[K[1m[92m   Compiling[0m block-buffer v0.10.4
+[1m[96m    Building[0m [===============>         ] 426/634: gtk, soup3, tauri(build.rs)…[1m[96m    Building[0m [===============>         ] 427/634: gtk, soup3, regex, tauri(bu…[K[1m[92m   Compiling[0m fdeflate v0.3.7
+[1m[96m    Building[0m [===============>         ] 428/634: gtk, soup3, fdeflate, tauri…[1m[96m    Building[0m [===============>         ] 429/634: gtk, soup3, fdeflate, jsonp…[K[1m[92m   Compiling[0m tauri-plugin v2.5.2
+[1m[96m    Building[0m [===============>         ] 430/634: gtk, soup3, jsonptr, tauri-…[1m[96m    Building[0m [===============>         ] 431/634: gtk, soup3, jsonptr, erased…[K[1m[92m   Compiling[0m http-body v1.0.1
+[1m[96m    Building[0m [================>        ] 432/634: gtk, soup3, http-body, eras…[K[1m[92m   Compiling[0m phf_shared v0.11.3
+[1m[96m    Building[0m [================>        ] 433/634: gtk, soup3, phf_shared, era…[K[1m[92m   Compiling[0m toml_parser v1.0.6+spec-1.1.0
+[1m[96m    Building[0m [================>        ] 434/634: gtk, soup3, toml_parser, er…[K[1m[92m   Compiling[0m toml_datetime v0.7.5+spec-1.1.0
+[1m[96m    Building[0m [================>        ] 435/634: gtk, toml_datetime, toml_pa…[1m[96m    Building[0m [================>        ] 436/634: gtk, toml_datetime, toml_pa…[K[1m[92m   Compiling[0m getrandom v0.2.17
+[1m[96m    Building[0m [================>        ] 437/634: gtk, toml_datetime, toml_pa…[K[1m[92m   Compiling[0m libloading v0.8.9
+[1m[96m    Building[0m [================>        ] 438/634: gtk, libloading, toml_parse…[K[1m[92m   Compiling[0m endi v1.1.1
+[1m[96m    Building[0m [================>        ] 439/634: gtk, libloading, endi, toml…[K[1m[92m   Compiling[0m raw-window-handle v0.6.2
+[1m[96m    Building[0m [================>        ] 440/634: gtk, endi, toml_parser, raw…[K[1m[92m   Compiling[0m home v0.5.12
+[1m[96m    Building[0m [================>        ] 441/634: gtk, toml_parser, raw-windo…[K[1m[92m   Compiling[0m untrusted v0.9.0
+[1m[96m    Building[0m [================>        ] 442/634: gtk, toml_parser, raw-windo…[K[1m[92m   Compiling[0m httparse v1.10.1
+[1m[96m    Building[0m [================>        ] 443/634: gtk, httparse(build.rs), to…[K[1m[92m   Compiling[0m bindgen v0.69.5
+[1m[96m    Building[0m [================>        ] 444/634: gtk, httparse(build.rs), bi…[K[1m[92m   Compiling[0m linux-raw-sys v0.11.0
+[1m[96m    Building[0m [================>        ] 445/634: gtk, httparse(build.rs), bi…[1m[96m    Building[0m [================>        ] 446/634: gtk, httparse(build.rs), bi…[1m[96m    Building[0m [================>        ] 447/634: gtk, httparse(build.rs), ri…[1m[96m    Building[0m [================>        ] 448/634: gtk, httparse(build), ring,…[K[1m[92m   Compiling[0m which v4.4.2
+[1m[96m    Building[0m [================>        ] 449/634: gtk, ring, which, linux-raw…[1m[96m    Building[0m [================>        ] 450/634: gtk, ring, clang-sys, linux…[1m[96m    Building[0m [================>        ] 451/634: gtk, rustix, ring, clang-sys[1m[96m    Building[0m [================>        ] 452/634: gtk, rustix, clang-sys, toml[1m[96m    Building[0m [================>        ] 453/634: gtk, rustix, serde-untagged…[1m[96m    Building[0m [================>        ] 454/634: gtk, rustix, phf, toml      [1m[96m    Building[0m [================>        ] 455/634: gtk, rustix, json-patch, to…[K[1m[92m   Compiling[0m png v0.17.16
+[1m[96m    Building[0m [================>        ] 456/634: gtk, rustix, json-patch, png[1m[96m    Building[0m [=================>       ] 457/634: gtk, rustix, tauri(build), …[1m[96m    Building[0m [=================>       ] 458/634: gtk, rustix, urlpattern, png[K[1m[92m   Compiling[0m digest v0.10.7
+[1m[96m    Building[0m [=================>       ] 459/634: gtk, rustix, urlpattern, di…[1m[96m    Building[0m [=================>       ] 460/634: gtk, rustix, urlpattern, in…[1m[96m    Building[0m [=================>       ] 461/634: gtk, rustix, urlpattern, co…[K[1m[92m   Compiling[0m quote v1.0.43
+[1m[96m    Building[0m [=================>       ] 462/634: gtk, rustix, quote, cookie  [1m[96m    Building[0m [=================>       ] 463/634: gtk, rustix, x11-dl, cookie [K[1m[92m   Compiling[0m cexpr v0.6.0
+[1m[96m    Building[0m [=================>       ] 464/634: gtk, x11-dl, cookie, cexpr  [K[1m[92m   Compiling[0m itertools v0.12.1
+[1m[96m    Building[0m [=================>       ] 465/634: gtk, x11-dl, itertools, cex…[K[1m[92m   Compiling[0m webkit2gtk v2.0.1
+[1m[96m    Building[0m [=================>       ] 466/634: gtk, x11-dl, itertools, web…[1m[96m    Building[0m [=================>       ] 467/634: gtk, x11-dl, prettyplease, …[K[1m[92m   Compiling[0m tokio-util v0.7.18
+[1m[96m    Building[0m [=================>       ] 468/634: gtk, tokio-util, x11-dl, we…[K[1m[92m   Compiling[0m crossbeam-channel v0.5.15
+[1m[96m    Building[0m [=================>       ] 469/634: gtk, x11-dl, crossbeam-chan…[1m[96m    Building[0m [=================>       ] 470/634: gtk, x11-dl, serde_with, we…[1m[96m    Building[0m [=================>       ] 471/634: gtk, serde_with, parking_lo…[K[1m[92m   Compiling[0m async-io v2.6.0
+[1m[96m    Building[0m [=================>       ] 472/634: gtk, async-io(build.rs), se…[K[1m[92m   Compiling[0m dlopen2_derive v0.4.3
+[1m[96m    Building[0m [=================>       ] 473/634: gtk, dlopen2_derive, serde_…[K[1m[92m   Compiling[0m wry v0.53.5
+[1m[96m    Building[0m [=================>       ] 474/634: gtk, serde_with, wry(build.…[K[1m[92m   Compiling[0m cpufeatures v0.2.17
+[1m[96m    Building[0m [=================>       ] 475/634: gtk, serde_with, webkit2gtk…[K[1m[92m   Compiling[0m rustc-hash v1.1.0
+[1m[96m    Building[0m [=================>       ] 476/634: gtk, serde_with, rustc-hash…[K[1m[92m   Compiling[0m tower-service v0.3.3
+[1m[96m    Building[0m [=================>       ] 477/634: gtk, serde_with, tower-serv…[K[1m[92m   Compiling[0m rustls v0.23.36
+[1m[96m    Building[0m [=================>       ] 478/634: gtk, serde_with, rustls(bui…[K[1m[92m   Compiling[0m lazycell v1.3.0
+[1m[96m    Building[0m [=================>       ] 479/634: gtk, serde_with, lazycell, …[K[1m[92m   Compiling[0m semver v1.0.27
+[1m[96m    Building[0m [=================>       ] 480/634: gtk, semver, serde_with, we…[K[1m[92m   Compiling[0m tauri-runtime v2.9.2
+[1m[96m    Building[0m [=================>       ] 481/634: gtk, semver, webkit2gtk, ta…[K[1m[92m   Compiling[0m openssl v0.10.75
+[1m[96m    Building[0m [==================>      ] 482/634: gtk, semver, webkit2gtk, op…[K[1m[92m   Compiling[0m try-lock v0.2.5
+[1m[96m    Building[0m [==================>      ] 483/634: gtk, try-lock, webkit2gtk, …[K[1m[92m   Compiling[0m foreign-types-shared v0.1.1
+[1m[96m    Building[0m [==================>      ] 484/634: gtk, try-lock, foreign-type…[K[1m[92m   Compiling[0m want v0.3.1
+[1m[96m    Building[0m [==================>      ] 485/634: gtk, want, foreign-types-sh…        Info File src-tauri/src/lib.rs changed. Rebuilding application...
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+        Info File src-tauri/src/lib.rs changed. Rebuilding application...
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+        Info File src-tauri/src/lib.rs changed. Rebuilding application...
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+[1m[92m   Compiling[0m gtk v0.18.2
+[1m[92m   Compiling[0m foreign-types-shared v0.1.1
+[1m[92m   Compiling[0m wry v0.53.5
+[1m[92m   Compiling[0m bindgen v0.69.5
+[1m[96m    Building[0m [==================>      ] 485/634: gtk, bindgen, foreign-types…[K[1m[92m   Compiling[0m tauri-utils v2.8.1
+[1m[96m    Building[0m [==================>      ] 486/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m foreign-types v0.3.2
+[1m[96m    Building[0m [==================>      ] 487/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m want v0.3.1
+[1m[96m    Building[0m [==================>      ] 488/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m openssl v0.10.75
+[1m[96m    Building[0m [==================>      ] 489/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m rustls v0.23.36
+[1m[96m    Building[0m [==================>      ] 490/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m sha2 v0.10.9
+[1m[96m    Building[0m [==================>      ] 491/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m tauri-runtime v2.9.2
+[1m[96m    Building[0m [==================>      ] 492/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m async-io v2.6.0
+[1m[96m    Building[0m [==================>      ] 493/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m dlopen2 v0.8.2
+[1m[96m    Building[0m [==================>      ] 494/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m parking_lot v0.12.5
+[1m[96m    Building[0m [==================>      ] 495/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m h2 v0.4.13
+[1m[96m    Building[0m [==================>      ] 496/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m syn v2.0.114
+[1m[96m    Building[0m [==================>      ] 497/634: tauri-utils, gtk, bindgen, …[K[1m[92m   Compiling[0m ico v0.4.0
+[1m[96m    Building[0m [==================>      ] 498/634: tauri-utils, gtk, syn, ico  [K[1m[92m   Compiling[0m httparse v1.10.1
+[1m[96m    Building[0m [==================>      ] 499/634: tauri-utils, gtk, syn, http…[K[1m[92m   Compiling[0m polling v3.11.0
+[1m[96m    Building[0m [==================>      ] 500/634: tauri-utils, gtk, polling, …[K[1m[92m   Compiling[0m rustls-webpki v0.103.9
+[1m[96m    Building[0m [==================>      ] 501/634: tauri-utils, gtk, syn, rust…[K[1m[92m   Compiling[0m gdkx11 v0.18.2
+[1m[96m    Building[0m [==================>      ] 502/634: tauri-utils, gtk, gdkx11, s…[K[1m[92m   Compiling[0m openssl-sys v0.9.111
+[1m[96m    Building[0m [==================>      ] 503/634: tauri-utils, gtk, openssl-s…[K[1m[92m   Compiling[0m enumflags2 v0.7.12
+[1m[96m    Building[0m [==================>      ] 504/634: tauri-utils, gtk, enumflags…[K[1m[92m   Compiling[0m gdkwayland-sys v0.18.2
+[1m[96m    Building[0m [==================>      ] 505/634: tauri-utils, gtk, gdkwaylan…[K[1m[92m   Compiling[0m cmake v0.1.57
+[1m[96m    Building[0m [==================>      ] 506/634: tauri-utils, gtk, cmake, syn[K[1m[92m   Compiling[0m ahash v0.8.12
+[1m[96m    Building[0m [==================>      ] 507/634: tauri-utils, gtk, syn, ahas…[K[1m[92m   Compiling[0m openssl-macros v0.1.1
+[1m[96m    Building[0m [===================>     ] 508/634: tauri-utils, gtk, openssl-m…[K[1m[92m   Compiling[0m errno v0.3.14
+[1m[96m    Building[0m [===================>     ] 509/634: tauri-utils, gtk, errno, syn[K[1m[92m   Compiling[0m async-task v4.7.1
+[1m[96m    Building[0m [===================>     ] 510/634: tauri-utils, gtk, async-tas…[K[1m[92m   Compiling[0m subtle v2.6.1
+[1m[96m    Building[0m [===================>     ] 511/634: tauri-utils, gtk, syn, subt…[K[1m[92m   Compiling[0m tauri-runtime-wry v2.9.3
+[1m[96m    Building[0m [===================>     ] 512/634: tauri-utils, gtk, syn, taur…[K[1m[92m   Compiling[0m native-tls v0.2.14
+[1m[96m    Building[0m [===================>     ] 513/634: tauri-utils, gtk, native-tl…[K[1m[92m   Compiling[0m fs_extra v1.3.0
+[1m[96m    Building[0m [===================>     ] 514/634: tauri-utils, gtk, fs_extra,…[K[1m[92m   Compiling[0m unicode-segmentation v1.12.0
+[1m[96m    Building[0m [===================>     ] 515/634: tauri-utils, gtk, fs_extra,…[1m[96m    Building[0m [===================>     ] 516/634: native-tls(build), gtk, fs_…[1m[96m    Building[0m [===================>     ] 517/634: gtk, fs_extra, unicode-segm…[1m[96m    Building[0m [===================>     ] 518/634: gtk, fs_extra, unicode-segm…[K[1m[92m   Compiling[0m whisper-rs-sys v0.11.1
+[1m[96m    Building[0m [===================>     ] 519/634: whisper-rs-sys(build.rs), g…[K[1m[92m   Compiling[0m keyboard-types v0.7.0
+[1m[96m    Building[0m [===================>     ] 520/634: whisper-rs-sys(build.rs), g…[K[1m[92m   Compiling[0m signal-hook-registry v1.4.8
+[1m[96m    Building[0m [===================>     ] 521/634: signal-hook-registry, gtk, …[1m[96m    Building[0m [===================>     ] 522/634: openssl, gtk, keyboard-type…[1m[96m    Building[0m [===================>     ] 523/634: openssl, gtk, ahash(build),…[K[1m[92m   Compiling[0m zvariant v5.9.2
+[1m[96m    Building[0m [===================>     ] 524/634: openssl, gtk, zvariant, rus…[K[1m[92m   Compiling[0m zvariant_utils v3.3.0
+[1m[96m    Building[0m [===================>     ] 525/634: gtk, zvariant_utils, zvaria…[1m[96m    Building[0m [===================>     ] 526/634: async-io, gtk, zvariant_uti…[K[1m[92m   Compiling[0m hyper v1.8.1
+[1m[96m    Building[0m [===================>     ] 527/634: async-io, gtk, hyper, rustls[K[1m[92m   Compiling[0m tauri-codegen v2.5.2
+[1m[96m    Building[0m [===================>     ] 528/634: gtk, tauri-codegen, hyper, …[K[1m[92m   Compiling[0m async-channel v2.5.0
+[1m[96m    Building[0m [===================>     ] 529/634: async-channel, gtk, tauri-c…[K[1m[92m   Compiling[0m webpki-roots v1.0.5
+[1m[96m    Building[0m [===================>     ] 530/634: gtk, tauri-codegen, webpki-…[1m[96m    Building[0m [===================>     ] 531/634: enumflags2, gtk, tauri-code…[K[1m[92m   Compiling[0m alsa-sys v0.3.1
+[1m[96m    Building[0m [===================>     ] 532/634: gtk, tauri-codegen, alsa-sy…[K[1m[92m   Compiling[0m serde_repr v0.1.20
+[1m[96m    Building[0m [====================>    ] 533/634: serde_repr, gtk, alsa-sys(b…[K[1m[92m   Compiling[0m serialize-to-javascript-impl v0.1.2
+[1m[96m    Building[0m [====================>    ] 534/634: serde_repr, gtk, serialize-…[K[1m[92m   Compiling[0m mime v0.3.17
+[1m[96m    Building[0m [====================>    ] 535/634: gtk, serialize-to-javascrip…[K[1m[92m   Compiling[0m openssl-probe v0.1.6
+[1m[96m    Building[0m [====================>    ] 536/634: gtk, mime, openssl-probe, r…[K[1m[92m   Compiling[0m ipnet v2.11.0
+[1m[96m    Building[0m [====================>    ] 537/634: gtk, ipnet, mime, rustls    [1m[96m    Building[0m [====================>    ] 538/634: gtk, ipnet, mime, native-tls[K[1m[92m   Compiling[0m serialize-to-javascript v0.1.2
+[1m[96m    Building[0m [====================>    ] 539/634: gtk, serialize-to-javascrip…[1m[96m    Building[0m [====================>    ] 540/634: alsa-sys(build), gtk, ipnet…[K[1m[91merror[0m: failed to run custom build command for `alsa-sys v0.3.1`
+
+Caused by:
+  process didn't exit successfully: `/app/src-tauri/target/debug/build/alsa-sys-41a0491ae8266212/build-script-build` (exit status: 101)
+  --- stdout
+  cargo:rerun-if-env-changed=ALSA_NO_PKG_CONFIG
+  cargo:rerun-if-env-changed=PKG_CONFIG_x86_64-unknown-linux-gnu
+  cargo:rerun-if-env-changed=PKG_CONFIG_x86_64_unknown_linux_gnu
+  cargo:rerun-if-env-changed=HOST_PKG_CONFIG
+  cargo:rerun-if-env-changed=PKG_CONFIG
+  cargo:rerun-if-env-changed=ALSA_STATIC
+  cargo:rerun-if-env-changed=ALSA_DYNAMIC
+  cargo:rerun-if-env-changed=PKG_CONFIG_ALL_STATIC
+  cargo:rerun-if-env-changed=PKG_CONFIG_ALL_DYNAMIC
+  cargo:rerun-if-env-changed=PKG_CONFIG_PATH_x86_64-unknown-linux-gnu
+  cargo:rerun-if-env-changed=PKG_CONFIG_PATH_x86_64_unknown_linux_gnu
+  cargo:rerun-if-env-changed=HOST_PKG_CONFIG_PATH
+  cargo:rerun-if-env-changed=PKG_CONFIG_PATH
+  cargo:rerun-if-env-changed=PKG_CONFIG_LIBDIR_x86_64-unknown-linux-gnu
+  cargo:rerun-if-env-changed=PKG_CONFIG_LIBDIR_x86_64_unknown_linux_gnu
+  cargo:rerun-if-env-changed=HOST_PKG_CONFIG_LIBDIR
+  cargo:rerun-if-env-changed=PKG_CONFIG_LIBDIR
+  cargo:rerun-if-env-changed=PKG_CONFIG_SYSROOT_DIR_x86_64-unknown-linux-gnu
+  cargo:rerun-if-env-changed=PKG_CONFIG_SYSROOT_DIR_x86_64_unknown_linux_gnu
+  cargo:rerun-if-env-changed=HOST_PKG_CONFIG_SYSROOT_DIR
+  cargo:rerun-if-env-changed=PKG_CONFIG_SYSROOT_DIR
+
+  --- stderr
+
+  thread 'main' (11196) panicked at /home/jules/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/alsa-sys-0.3.1/build.rs:13:18:
+
+  pkg-config exited with status code 1
+  > PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 pkg-config --libs --cflags alsa
+
+  The system library `alsa` required by crate `alsa-sys` was not found.
+  The file `alsa.pc` needs to be installed and the PKG_CONFIG_PATH environment variable must contain its parent directory.
+  The PKG_CONFIG_PATH environment variable is not set.
+
+  HINT: if you have installed the library, try setting PKG_CONFIG_PATH to the directory containing `alsa.pc`.
+
+  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+[1m[33mwarning[0m: build failed, waiting for other jobs to finish...
+[1m[96m    Building[0m [====================>    ] 541/634: gtk, ipnet, native-tls      [1m[96m    Building[0m [====================>    ] 542/634: gtk, ipnet                  [1m[96m    Building[0m [====================>    ] 543/634: gtk                         [K

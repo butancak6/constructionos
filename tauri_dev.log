@@ -1,0 +1,22 @@
+
+> tauri-app@0.1.0 tauri
+> tauri dev
+
+     Running BeforeDevCommand (`npm run dev`)
+
+> tauri-app@0.1.0 dev
+> vite
+
+
+  VITE v7.3.1  ready in 303 ms
+
+  ➜  Local:   http://localhost:1420/
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+        Info Watching /app/src-tauri for changes...
+[1m[92m   Compiling[0m construction-os v0.0.0 (/app/src-tauri)
+[1m[96m    Building[0m [=======================> ] 632/634: construction-os             [1m[96m    Building[0m [=======================> ] 633/634: construction-os(bin)        [K[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 8.23s
+[1m[92m     Running[0m `target/debug/construction-os`
+
+thread 'main' (19043) panicked at /home/jules/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tao-0.34.5/src/platform_impl/linux/event_loop.rs:218:53:
+Failed to initialize gtk backend!: BoolError { message: "Failed to initialize GTK", filename: "/home/jules/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gtk-0.18.2/src/rt.rs", function: "gtk::rt::init", line: 141 }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

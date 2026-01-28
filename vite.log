@@ -1,0 +1,10 @@
+
+> tauri-app@0.1.0 dev
+> vite
+
+
+  VITE v7.3.1  ready in 254 ms
+
+  ➜  Local:   http://localhost:1420/
+4:21:54 PM [vite] (client) hmr update /src/App.tsx
+4:25:23 PM [vite] (client) hmr update /src/App.tsx
