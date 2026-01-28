@@ -84,6 +84,14 @@ struct ContactSuggestion {
     company: Option<String>,
 }
 
+#[derive(serde::Serialize, serde::Deserialize, Clone, Debug)]
+struct CalendarEvent {
+    id: String,
+    title: String,
+    start_time: String,
+    duration_minutes: i64,
+}
+
 struct AppState {
     db_path: Mutex<String>,
 }
@@ -447,6 +455,18 @@ fn confirm_expense(expense: Expense, state: State<'_, AppState>) -> Result<Strin
 }
 
 #[tauri::command]
+fn confirm_calendar_event(event: CalendarEvent, state: State<'_, AppState>) -> Result<String, String> {
+    let path_guard = state.db_path.lock().unwrap();
+    let conn = Connection::open(path_guard.as_str()).map_err(|e| e.to_string())?;
+    conn.execute(
+        "INSERT INTO calendar_events (id, title, start_time, duration_minutes) VALUES (?1, ?2, ?3, ?4)",
+        &[&event.id, &event.title, &event.start_time, &event.duration_minutes.to_string()],
+    )
+    .map_err(|e| e.to_string())?;
+    Ok("Saved".to_string())
+}
+
+#[tauri::command]
 fn init_db(state: State<'_, AppState>) -> Result<String, String> {
     let home = dirs::home_dir().ok_or("No Home")?;
     let db_path = home.join(".construction-os").join("construction.db");
@@ -463,6 +483,7 @@ fn init_db(state: State<'_, AppState>) -> Result<String, String> {
     let _ = conn.execute("ALTER TABLE tasks ADD COLUMN due_date TEXT", []);
     conn.execute("CREATE TABLE IF NOT EXISTS contacts (id TEXT PRIMARY KEY, name TEXT, phone TEXT, company TEXT, created_at TEXT)", []).map_err(|e| e.to_string())?;
     conn.execute("CREATE TABLE IF NOT EXISTS expenses (id TEXT PRIMARY KEY, merchant TEXT, amount REAL, category TEXT, date TEXT, image_path TEXT, status TEXT)", []).map_err(|e| e.to_string())?;
+    conn.execute("CREATE TABLE IF NOT EXISTS calendar_events (id TEXT PRIMARY KEY, title TEXT, start_time TEXT, duration_minutes INTEGER)", []).map_err(|e| e.to_string())?;
     *state.db_path.lock().unwrap() = db_path.to_string_lossy().to_string();
     Ok("Ready".to_string())
 }
@@ -494,6 +515,30 @@ fn get_invoices(state: State<'_, AppState>) -> Result<Vec<Invoice>, String> {
                 } else {
                     None
                 },
+            })
+        })
+        .map_err(|e| e.to_string())?;
+    let mut results = Vec::new();
+    for row in rows {
+        results.push(row.map_err(|e| e.to_string())?);
+    }
+    Ok(results)
+}
+
+#[tauri::command]
+fn get_calendar_events(state: State<'_, AppState>) -> Result<Vec<CalendarEvent>, String> {
+    let path_guard = state.db_path.lock().unwrap();
+    let conn = Connection::open(path_guard.as_str()).map_err(|e| e.to_string())?;
+    let mut stmt = conn
+        .prepare("SELECT id, title, start_time, duration_minutes FROM calendar_events ORDER BY start_time ASC")
+        .map_err(|e| e.to_string())?;
+    let rows = stmt
+        .query_map([], |row| {
+            Ok(CalendarEvent {
+                id: row.get(0)?,
+                title: row.get(1)?,
+                start_time: row.get(2)?,
+                duration_minutes: row.get(3)?,
             })
         })
         .map_err(|e| e.to_string())?;
@@ -827,11 +872,13 @@ pub fn run() {
             confirm_task,
             confirm_contact,
             confirm_expense,
+            confirm_calendar_event,
             save_invoice_pdf,
             get_invoices,
             get_tasks,
             get_contacts,
             get_expenses,
+            get_calendar_events,
             get_financial_summary,
             get_recent_activity,
             open_system_link,
