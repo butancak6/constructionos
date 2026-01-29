@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
-import { invoke } from "@tauri-apps/api/core";
+import { invoke } from "./lib/tauri";
 import { useOfflineQueue } from "./hooks/useOfflineQueue";
 import { useWavRecorder } from "./hooks/useWavRecorder.ts";
 import { generateInvoicePDF } from "./pdfGenerator";
 import { dataService } from "./services/dataService";
 import { supabase } from "./lib/supabase"; // Direct import for robust logic
+import Dashboard from "./components/Dashboard";
 import {
   LayoutDashboard,
+  Home,
   Users,
   FileText,
   Settings as SettingsIcon,
@@ -754,9 +756,9 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
 
 
   const NavBar = () => (
-    <nav className="fixed bottom-0 left-0 right-0 h-24 bg-white/95 backdrop-blur-md border-t border-slate-100 flex items-center justify-around px-6 z-50 pb-safe pb-4">
-      <NavItem tab="DASHBOARD" label="Home" icon={LayoutDashboard} />
-      <NavItem tab="INVOICES" label="Invoices" icon={FileText} />
+    <nav className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] bg-white dark:bg-card-dark h-16 rounded-[24px] shadow-xl flex items-center justify-around px-4 border border-slate-100 dark:border-white/10 z-50">
+      <NavItem tab="DASHBOARD" icon={Home} />
+      <NavItem tab="CONTACTS" icon={Users} />
 
       {/* Floating Action Wrapper */}
       <div className="relative -top-8">
@@ -766,35 +768,33 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           onMouseUp={() => stopRecordingFlow()}
           onTouchStart={startRecordingFlow}
           onTouchEnd={() => stopRecordingFlow()}
-          className={`w-14 h-14 rounded-full bg-primary text-white shadow-lg shadow-blue-500/50 flex items-center justify-center transform transition-transform border-4 border-white ${isBusy || status === "THINKING" ? "opacity-50 cursor-not-allowed" : "active:scale-95 hover:scale-105"
+          className={`w-16 h-16 rounded-full bg-primary text-white shadow-lg shadow-blue-500/40 flex items-center justify-center transform transition-transform ring-8 ring-white dark:ring-[#000000] ${isBusy || status === "THINKING" ? "opacity-50 cursor-not-allowed" : "active:scale-95 hover:scale-105"
             }`}
         >
           {isBusy ? (
-            <span className="text-xs font-bold">Wait</span>
+            <span className="text-xs font-bold">...</span>
           ) : isRecording ? (
             <div className="w-4 h-4 bg-white rounded-sm" />
           ) : (
-            <Mic size={24} />
+            <Mic size={30} />
           )}
         </button>
       </div>
 
-      <NavItem tab="TASKS" label="Tasks" icon={List} />
-      <NavItem tab="CALENDAR" label="Calendar" icon={Calendar} />
-      <NavItem tab="CONTACTS" label="Clients" icon={Users} />
+      <NavItem tab="INVOICES" icon={FileText} />
+      <NavItem tab="SETTINGS" icon={SettingsIcon} />
     </nav>
   );
 
-  const NavItem = ({ tab, label, icon: Icon }: { tab: Tab; label: string; icon: any }) => {
+  const NavItem = ({ tab, icon: Icon }: { tab: Tab; icon: any }) => {
     const isActive = currentTab === tab;
     return (
       <button
         onClick={() => setCurrentTab(tab)}
-        className={`flex flex-col items-center gap-1 p-2 w-14 transition-colors ${isActive ? "text-primary" : "text-slate-400 hover:text-slate-600"
+        className={`flex flex-col items-center justify-center w-12 h-12 transition-colors ${isActive ? "text-primary" : "text-slate-400 dark:text-slate-500 hover:text-slate-600"
           }`}
       >
-        <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
-        <span className="text-[10px] font-bold tracking-wide truncate w-full text-center">{label}</span>
+        <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
       </button>
     );
   };
@@ -1139,58 +1139,17 @@ IF Client: { "intent": "create_client", "name": "String", "phone": "String or nu
           </div>
         )}
 
-        <Header />
+        {currentTab !== "DASHBOARD" && <Header />}
 
-        <main className="flex-1 overflow-y-auto overflow-x-hidden pt-28 pb-36 px-4 scrollbar-hide">
+        <main className={`flex-1 overflow-y-auto overflow-x-hidden pb-36 scrollbar-hide ${currentTab !== "DASHBOARD" ? "pt-28 px-4" : ""}`}>
 
           {currentTab === "DASHBOARD" && (
-            <div className="space-y-6 animate-in fade-in duration-500">
-              {/* Quick Actions */}
-              <div>
-                <h2 className="text-lg font-black text-slate-900 mb-3 ml-1">Quick Actions</h2>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    onClick={startRecordingFlow}
-                    className="bg-blue-600 text-white p-4 rounded-xl shadow-lg shadow-blue-200 active:scale-95 transition-transform flex flex-col items-center justify-center gap-2"
-                  >
-                    <Mic size={24} />
-                    <span className="font-bold text-sm">Record Voice</span>
-                  </button>
-                  <button
-                    onClick={() => {
-                        const name = prompt("Client Name:");
-                        if(name) {
-                            const newClient: Client = { id: `CLI-${Date.now()}`, name };
-                            setClients(prev => [newClient, ...prev]);
-                            showToast("Client Added", "success");
-                        }
-                    }}
-                    className="bg-white text-slate-900 border border-stone-200 p-4 rounded-xl shadow-sm active:scale-95 transition-transform flex flex-col items-center justify-center gap-2"
-                  >
-                    <UserPlus size={24} className="text-blue-600" />
-                    <span className="font-bold text-sm">Add Client</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Today's Agenda */}
-              <div>
-                <h2 className="text-lg font-black text-slate-900 mb-3 ml-1">Today's Agenda</h2>
-                <div className="space-y-3">
-                  {tasks.slice(0, 3).map(t => <TaskCard key={t.id} task={t} />)}
-                  {tasks.length === 0 && <EmptyState message="No tasks due soon" />}
-                </div>
-              </div>
-
-              {/* Recent Invoices */}
-              <div>
-                <h2 className="text-lg font-black text-slate-900 mb-3 ml-1">Recent Invoices</h2>
-                <div className="space-y-3">
-                  {invoices.slice(0, 3).map(inv => <InvoiceCard key={inv.id} invoice={inv} />)}
-                  {invoices.length === 0 && <EmptyState message="No invoices yet" />}
-                </div>
-              </div>
-            </div>
+            <Dashboard
+              invoices={invoices}
+              tasks={tasks}
+              financials={financials}
+              clients={clients}
+            />
           )}
 
           {currentTab === "INVOICES" && (

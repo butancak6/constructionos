@@ -7,12 +7,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#2563EB',
+        primary: '#007AFF',
         'primary-dark': '#1E40AF',
         secondary: '#F1F5F9',
         surface: '#FFFFFF',
         'text-main': '#0F172A',
         'text-muted': '#64748B',
+        "background-light": "#F2F7FF",
+        "background-dark": "#0A0A0C",
+        card: {
+            light: "#FFFFFF",
+            dark: "#1C1C1E"
+        }
       },
       borderRadius: {
         'xl': '1rem',
