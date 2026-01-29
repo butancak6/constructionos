@@ -10,54 +10,13 @@ import {
   Signal,
   Battery
 } from "lucide-react";
+import { useApp } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
-// Types (mirrored from App.tsx for now)
-export interface Invoice {
-  id: string;
-  client: string;
-  amount: number;
-  status: string;
-  items: any[];
-  description: string;
-  client_phone?: string;
-  client_company?: string;
-  pdf_path?: string | null;
-  intent?: string;
-  created_at?: string;
-  date?: string;
-}
-
-export interface Task {
-  id: string;
-  description: string;
-  priority: 'High' | 'Medium' | 'Low';
-  done: boolean;
-  due_date?: string | null;
-}
-
-export interface Client {
-  id: string;
-  name: string;
-  phone?: string;
-  address?: string;
-  company?: string;
-}
-
-export interface FinancialSummary {
-  revenue: number;
-  expenses: number;
-  profit: number;
-}
-
-interface DashboardProps {
-  invoices: Invoice[];
-  tasks: Task[];
-  financials: FinancialSummary;
-  clients: Client[];
-  userName?: string;
-}
-
-export default function Dashboard({ invoices, tasks, financials, clients, userName = "Jason" }: DashboardProps) {
+export default function Dashboard() {
+  const { invoices, tasks } = useApp();
+  const navigate = useNavigate();
+  const userName = "Jason";
 
   // Computed Stats
   const outstandingCount = invoices.filter(i => i.status !== "PAID").length;
@@ -67,7 +26,7 @@ export default function Dashboard({ invoices, tasks, financials, clients, userNa
 
   const unpaidInvoices = invoices.filter(i => i.status !== "PAID");
 
-  // This Month Stats (Mock logic for now as we don't have date filtering strictly enforced yet in props)
+  // This Month Stats
   const paidAmount = invoices.filter(i => i.status === "PAID").reduce((sum, inv) => sum + inv.amount, 0);
   const unpaidAmount = invoices.filter(i => i.status !== "PAID").reduce((sum, inv) => sum + inv.amount, 0);
   const totalAmount = paidAmount + unpaidAmount || 1; // Avoid div by zero
@@ -96,6 +55,7 @@ export default function Dashboard({ invoices, tasks, financials, clients, userNa
                 alt="User Avatar"
                 className="w-full h-full object-cover"
                 src="https://i.pravatar.cc/150?u=jason"
+                onError={(e) => (e.currentTarget.style.display = 'none')}
               />
             </div>
             <div>
@@ -127,28 +87,28 @@ export default function Dashboard({ invoices, tasks, financials, clients, userNa
         <div className="grid grid-cols-2 gap-3 mb-8">
 
           {/* Outstanding */}
-          <div className="bg-primary/95 dark:bg-primary p-4 rounded-3xl shadow-lg relative overflow-hidden h-[110px] group">
+          <div onClick={() => navigate('/invoices')} className="bg-primary/95 dark:bg-primary p-4 rounded-3xl shadow-lg relative overflow-hidden h-[110px] group active:scale-95 transition-transform cursor-pointer">
             <p className="text-white/80 text-xs font-semibold">Outstanding</p>
             <p className="text-white text-3xl font-bold mt-2">{outstandingCount.toString().padStart(2, '0')}</p>
             <Hourglass className="absolute -bottom-1 -right-2 text-white/10 w-16 h-16 rotate-12 transition-transform group-hover:scale-110" />
           </div>
 
           {/* Paid Invoices */}
-          <div className="bg-[#1E4D9C] p-4 rounded-3xl shadow-lg relative overflow-hidden h-[110px] group">
+          <div onClick={() => navigate('/invoices')} className="bg-[#1E4D9C] p-4 rounded-3xl shadow-lg relative overflow-hidden h-[110px] group active:scale-95 transition-transform cursor-pointer">
             <p className="text-white/80 text-xs font-semibold">Paid Invoices</p>
             <p className="text-white text-3xl font-bold mt-2">{paidCount.toString().padStart(2, '0')}</p>
             <FileText className="absolute -bottom-1 -right-2 text-white/10 w-16 h-16 -rotate-12 transition-transform group-hover:scale-110" />
           </div>
 
           {/* Overdue Invoices */}
-          <div className="bg-[#4176CE] p-4 rounded-3xl shadow-lg relative overflow-hidden h-[110px] group">
+          <div onClick={() => navigate('/invoices')} className="bg-[#4176CE] p-4 rounded-3xl shadow-lg relative overflow-hidden h-[110px] group active:scale-95 transition-transform cursor-pointer">
             <p className="text-white/80 text-xs font-semibold">Overdue Invoices</p>
             <p className="text-white text-3xl font-bold mt-2">{overdueCount.toString().padStart(2, '0')}</p>
             <Clock className="absolute -bottom-1 -right-2 text-white/10 w-16 h-16 transition-transform group-hover:scale-110" />
           </div>
 
           {/* Unapproved */}
-          <div className="bg-[#2B5EB1] p-4 rounded-3xl shadow-lg relative overflow-hidden h-[110px] group">
+          <div onClick={() => navigate('/invoices')} className="bg-[#2B5EB1] p-4 rounded-3xl shadow-lg relative overflow-hidden h-[110px] group active:scale-95 transition-transform cursor-pointer">
             <p className="text-white/80 text-xs font-semibold">Unapproved</p>
             <p className="text-white text-3xl font-bold mt-2">{unapprovedCount.toString().padStart(2, '0')}</p>
             <XCircle className="absolute -bottom-1 -right-2 text-white/10 w-16 h-16 transition-transform group-hover:scale-110" />
@@ -159,7 +119,7 @@ export default function Dashboard({ invoices, tasks, financials, clients, userNa
         <section className="mb-8">
           <div className="flex items-center justify-between px-2 mb-4">
             <h2 className="text-xl font-bold dark:text-white text-slate-900">Unpaid Invoices</h2>
-            <button className="text-primary text-sm font-bold hover:opacity-80">View All</button>
+            <button onClick={() => navigate('/invoices')} className="text-primary text-sm font-bold hover:opacity-80 active:scale-95 transition-transform">View All</button>
           </div>
           <div className="flex gap-4 overflow-x-auto hide-scrollbar px-2 pb-2">
             {unpaidInvoices.length > 0 ? unpaidInvoices.map((inv) => (
@@ -206,7 +166,7 @@ export default function Dashboard({ invoices, tasks, financials, clients, userNa
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-between pt-5 border-t border-slate-100 dark:border-white/5">
+            <div onClick={() => navigate('/tasks')} className="flex items-center justify-between pt-5 border-t border-slate-100 dark:border-white/5 active:scale-95 transition-transform cursor-pointer">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-primary"></div>
                 <span className="text-sm font-bold text-slate-500">{completedTasks} Completed Tasks</span>
