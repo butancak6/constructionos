@@ -1,8 +1,13 @@
+@import "tailwindcss";
 @import '@fontsource/inter';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-primary: #007AFF;
+  --color-background-light: #F2F7FF;
+  --color-background-dark: #0A0A0C;
+  --color-card-light: #FFFFFF;
+  --color-card-dark: #1C1C1E;
+}
 
 :root {
     background-color: #F8FAFC;
@@ -40,4 +45,12 @@ body {
 
 .pb-safe {
     padding-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
